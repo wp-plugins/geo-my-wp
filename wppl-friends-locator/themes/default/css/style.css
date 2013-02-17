@@ -1,5 +1,5 @@
 /*     info window   */
-
+/*
 .infoBox {
 	background: white !important;
 	-moz-border-radius: 5px;
@@ -47,7 +47,7 @@
 	color:#333;
 	font-weight:bold;
 	}	
-	
+*/	
 /* //// map  /////// */
 	
 div#wppl-output-wrapper {
@@ -56,10 +56,13 @@ div#wppl-output-wrapper {
 	}
 	
 #wppl-output-wrapper #show-hide-btn-wrapper {
-	position: absolute;
-	left: 5px;
-	top: 5px;
+	float: left;
+	margin: 3px;
 	}
+	
+#wppl-output-wrapper #show-hide-btn-wrapper img {
+	max-width:initial;
+}
 	
 #wppl-output-wrapper #show-hide-btn-wrapper a:hover {
 	opacity:0.8;
@@ -98,28 +101,44 @@ div.pagination {
 	border: none;
 	color: #888;
 	font-size: 11px;
-	height: 19px;
-	margin: -20px -19px 0px -19px;
-	padding: 8px 20px;
-	position: relative;
-}
-div.pagination .pag-count {
+	margin: 0px 0px;
 	float: left;
+	margin-bottom: 5px;
+	width: 100%;
+	padding:0px;
+	height:initial;
 }
-div.pagination .pagination-links {
-	float: right;
-}
-div.pagination .pagination-links span,
-div.pagination .pagination-links a {
-	font-size: 12px;
-	padding: 0 5px;
-}
-div.pagination .pagination-links a:hover {
-	font-weight: bold;
-}
+
 noscript div.pagination {
 	margin-bottom: 15px;
 }
+
+div.pagination .pag-count {
+	float: left;
+	padding:7px;
+}
+
+div.pagination .pagination-links {
+	float: right;
+	padding:7px;
+}
+
+.pagination span, .pagination a {
+	padding:0px;
+	background:none;
+}
+
+div.pagination .pagination-links span, div.pagination .pagination-links a:link, div.pagination .pagination-links a:visited {
+	font-size: 12px;
+	padding: 0 5px !important;
+	background: none;
+	color: #1FB3DD;
+}
+
+div.pagination .pagination-links a:hover {
+	font-weight: bold;
+}
+
 div#pag-bottom {
 	margin-top: -1px;
 }
@@ -135,20 +154,6 @@ div#pag-bottom {
 	margin-bottom: 5px !important;
 } 
 
-div.pagination .pag-count {
-	float: left;
-}
-
-div.pagination .pagination-links {
-	float: right;
-}
-
-
-
-div.pagination .pagination-links span, div.pagination .pagination-links a {
-	font-size: 12px;
-	padding: 0 5px;
-}
 
 /* ///////////////////// */
 
@@ -169,8 +174,8 @@ ul.wppl-item-list li {
 ul.wppl-item-list li .wppl-item-avatar img {
 	float: left;
 	margin: 0 10px 0 0;
-	width: 80px !important;
-	height: 80px !important;
+	width: 80px;
+	height: 80px;
 }
 
 #wppl-members-list li .wppl-item {
@@ -190,10 +195,18 @@ ul.wppl-item-list li div.wppl-item-title {
 	width: 75%;
 }
 
+ul.wppl-item-list li .wppl-item-meta {
+	float:left;
+}
+
+ul.wppl-item-list li .wppl-item-meta span.activity {
+	font-size:12px;
+}
+
 #wppl-members-list li .wppl-action {
 	float:right;
 	}
-	
+
 .bp-radius-wrapper {	
 	float: right;
 	padding: 1px 4px;

@@ -4,91 +4,126 @@
 /// 				THE CREATOR OF BP PROFILE SEARCH -- THANK YOU 					////
 ///////////////////////////////////////////////////////////////////////////////////////
 
+///// MEMBER'S LOCATION MAP SHORTCODE ////////
+function wppl_member_location($member) {
+	$member_address = array();
+	$show_address = array();
+			
+	extract(shortcode_atts(array(
+		'directions' 	=> '1',
+		'map_height' 	=> '250',
+		'map_width' 	=> '250',
+		'map_type' 		=> 'ROADMAP',
+		'zoom_level' 	=> 13,
+		'address' 		=> 1,
+		'no_location' 	=> 0	
+	),$member));
+	
+    global $bp, $wpdb, $mmc, $get_loc;
+    if(!isset($mmc)) $mmc = 0;
+    $mmc++;
+   
+    $member_info = $wpdb->get_results( 
+    					$wpdb->prepare(
+    						"SELECT * FROM wppl_friends_locator 
+    						WHERE member_id = %s", $bp->displayed_user->id
+    		 			), 
+    		 	   ARRAY_A );
+    		
+	if ( isset($member_info) && $member_info !=0) {
+		// get the address to be displayed
+		if ( is_multisite() ) {
+			$wppl_site_options = get_site_option('wppl_site_options'); 
+			$member_address = $wppl_site_options['friends']['single_location_address_fields'];
+		} else {
+			$wppl_options = get_option('wppl_fields'); 
+			$member_address = $wppl_options['friends']['single_location_address_fields'];
+		}
+		
+		if ( isset($member_address) && !empty($member_address) ) {
+			foreach ($member_address as $field) {
+				$show_address[] = $member_info[0][$field];
+			}
+			$show_address = implode(' ' , $show_address);
+		} else {
+			$show_address = $member_info[0]['address'];
+		}
+		
+   		$get_loc[$mmc] = array(
+    		'map_icon'		=> $member_info[0]['map_icon'],
+    		'map_type'		=> $map_type,
+    		'zoom_level' 	=> $zoom_level,
+    		'map_height' 	=> $map_height,
+    		'map_width'		=> $map_width,
+    		'address'		=> $show_address,
+    	);
+    	
+    	$single_member_args = array(
+			'singleMember'	=> $get_loc,
+			'memberMapId'	=> $mmc
+		);
+		
+    	$member_map .='';	
+    	$member_map .=	'<div class="wppl-single-member-wrapper">';
+    	if($address == 1) {
+    		$member_map .=		'<div class="wppl-single-member-address"><span>Address: </span>' .$get_loc[$mmc]['address'].'</div>';
+		}
+		$member_map .=		'<div class="wppl-single-member-map-wrapper" style="position:relative">';
+		$member_map .=			'<div id="member-map-'.$mmc.'" style="width:'.$get_loc[$mmc]['map_width'].'px; height:'.$get_loc[$mmc]['map_height'].'px;"></div>';
+		$member_map .=			'<img class="map-loader" src="'.GMW_URL. '/images/map-loader.gif" style="position:absolute;top:45%;left:25%;width:50%"/>';
+		$member_map .= 			'<div class="wppl-single-member-direction-wrapper" style="width:'.($get_loc[$mmc]['map_width'] - 10).'px">';
+    	$member_map .= 				'<div class="wppl-single-member-direction" style="display:none;">';
+		$member_map .=					'<form action="http://maps.google.com/maps" method="get" target="_blank">';
+		$member_map .= 						'<input type="text" name="saddr" />';
+		$member_map .= 						'<input type="hidden" name="daddr" value="'. $get_loc[$mmc]['address'].'" /><br />';
+		$member_map .= 						'<input type="submit" class="button" value="GO" />';
+		$member_map .= 					'</form>'; 
+		$member_map .= 				'</div>';
+		if ($directions == 1) {
+    		$member_map .= 				'<span><a href="#" class="show-directions">Get Directions</a></span>';
+    	}
+    	$member_map .= 			'</div>';
+    	$member_map .=		'</div>';// map wrapper //
+    	$member_map .=	'</div>';// map wrapper //
+    
+    	echo $member_map;
+    	wp_enqueue_script('wppl-member-map', true);
+    	wp_localize_script('wppl-member-map', 'sMArgs', $single_member_args);
+	} else {
+		if (isset($no_location) && $noLocation == 1) echo $bp->displayed_user->fullname . ' has not added a location yet.';
+	}
+}
+add_shortcode( 'wppl_member_location' , 'wppl_member_location' );
+
 //// paginations for buddypress  /////////////
 function bp_pagination_links($pages, $per_page) {
-	$page_n = $_GET['pagen'];
+	$page_n = ( isset($_GET['pagen']) ) ? $_GET['pagen'] : false ;
 	if ($pages > 1) {
-		
 		if ($page_n > 0) {		
 			echo '<a href="' .add_query_arg('pagen', ($page_n - 1)) .'" class="prev page-numbers" onclick="document.wppl_form.submit();">&#171;</a>';
-		} 		
-		
+		} 			
 		for($i=0; $i< $pages; $i++): 
 			$num = $i + 1;
     		echo '<a href="' .add_query_arg('pagen',$i) .'" '; echo ( $page_n+1 == $num ) ? 'class="page-numbers current"' : 'class="page-numbers"'; echo ' onclick="document.wppl_form.submit();">' . $num .  '</a>';
 		endfor; 
-		
 		if ($page_n < ($pages -1)) {
 			echo '<a href="' .add_query_arg('pagen', ($page_n + 1)) .'" class="next page-numbers" onclick="document.wppl_form.submit();">&#187;</a>';
 		}			
 	}
 }	
 
-////// show profile fields in admin area /////////////	
-function wppl_bp_admin_profile_fields($e_id, $option, $variable) {
-	global $bp;
-	global $field;
-	global $dateboxes;
-
-	if (bp_is_active ('xprofile')) : 
-	if (function_exists ('bp_has_profile')) : 
-		if (bp_has_profile ('hide_empty_fields=0')) :
-		
-			$dateboxes = array ();
-			$dateboxes[0] = '';
-
-			while (bp_profile_groups ()) : 
-				bp_the_profile_group (); 
-
-				//echo '<strong>'. bp_get_the_profile_group_name (). ':</strong><br />';
-
-				while (bp_profile_fields ()) : 
-					bp_the_profile_field(); ?>
-					<?php if ( (bp_get_the_profile_field_type () == 'datebox') ) {  ?>	
-						<?php $dateboxes[] = bp_get_the_profile_field_id(); ?>
-					<?php } 
-					
-					?>
-					<?php if ( (bp_get_the_profile_field_type () != 'textbox') && (bp_get_the_profile_field_type () != 'datebox') ) {  ?>	
-						<?php $field_id = bp_get_the_profile_field_id(); ?>
-						<input type="checkbox" name="<?php echo 'wppl_shortcode[' .$e_id .'][' .$variable . '][]'; ?>" value="<?php echo $field_id; ?>" <?php if ($option[$variable]) { echo (in_array($field_id, $option[$variable])) ? ' checked=checked' : '';} echo ($variable =='results_profile_fields') ? ' disabled' : ''; ?>/>
-						<label><?php bp_the_profile_field_name(); ?></label>
-						<br />
-					<?php } 
-			endwhile;
-			endwhile; ?>
-			
-			<label><strong style="margin:5px 0px;float:left;width:100%">Choose the Age Range Field</strong></label><br />
-			<select name="<?php echo 'wppl_shortcode[' .$e_id .']['.$variable.'_date]'; ?>" <?php echo ($variable =='results_profile_fields') ? ' disabled' : ''; ?>> 
-				<?php foreach ($dateboxes as $datebox) {  ?>
-					<?php $field = new BP_XProfile_Field( $datebox ); ?>
-					<?php $selected = ($option[$variable.'_date'] == $datebox) ? 'selected="selected"' : ''; ?>
-					<option value="<?php echo $datebox; ?>" <?php echo $selected; ?> ><?php echo $field->name; ?></option>
-				<?php } ?>
-			</select> 
-
-	<?php endif;
-	endif; 
-	endif; 
-	
-	if (!bp_is_active ('xprofile')) {
-		if (is_multisite()) $site_url = network_site_url('/wp-admin/network/admin.php?page=bp-components&updated=true');
-		else $site_url = site_url('/wp-admin/admin.php?page=bp-components&updated=true');
-		_e('Your buddypress profile fields are deactivated.  To activate and use them <a href="'.$site_url.'"> click here</a>.','wppl');
-	}
-}
-
 ///// fields dropdown for search form /////////
 function bp_fields_dropdown($wppl) {
-	global $bp;
-	 
 	 //// check buddypress fields ////
-    $total_fields = ($wppl['profile_fields'] ) ? $wppl['profile_fields'] : array();
+    $total_fields = ( isset($wppl['profile_fields']) ) ? $wppl['profile_fields'] : array();
 	if($wppl['profile_fields_date'] ) array_unshift($total_fields, $wppl['profile_fields_date']);
   	
-	echo '<div class="wppl-checkbox-category-wrapper">';
+	echo '<div class="wppl-category-wrapper">';
 		
 	foreach ($total_fields as $field_id) {
+		
+		$get_field = (isset($_GET[$field_id])) ? $_GET[$field_id] : '';
+		$get_field_to = (isset($_GET[$field_id. '_to'])) ? $_GET[$field_id. '_to'] : '';
 		
 		$field_data = new BP_XProfile_Field ($field_id);
 		$children = $field_data->get_children ();
@@ -96,10 +131,10 @@ function bp_fields_dropdown($wppl) {
 		switch ($field_data->type) {
 			case 'datebox':
 				echo "<div class='date'>";
-					echo '<label class="wppl-category-id">Age Range (min - max)</label><br />';
-					echo '<input size="3" type="text" name="'. $field_id.'" value="' . $_GET[$field_id] . '" placeholder="Min" />';
+					echo '<span class="label">Age Range (min - max)</span>';
+					echo '<input size="3" type="text" name="'. $field_id.'" value="' . $get_field . '" placeholder="Min" />';
 					echo '&nbsp;-&nbsp;';
-					echo '<input size="3" type="text" name="' . $field_id . '_to" value="' . $_GET[$field_id. '_to' ] . '" placeholder="Max" />';
+					echo '<input size="3" type="text" name="' . $field_id . '_to" value="' . $get_field_to . '" placeholder="Max" />';
 				echo '</div>';
 			break;
 		
@@ -107,19 +142,19 @@ function bp_fields_dropdown($wppl) {
 			case 'selectbox':
 			case 'radio':
 			case 'checkbox': 
-				echo '<div class="wppl-category-checkbox">';
-					echo '<label class="wppl-category-id">' . $field_data->name. '</label><br />';
+				echo '<div class="checkbox">';
+					echo '<span class="label">' . $field_data->name. '</span>';
 					$tt = array();
-					if($_GET[$field_id]) { 
-						$tt = $_GET[$field_id];
+					if($get_field) { 
+						$tt = $get_field;
 					}
-					echo '<div class="wppl-checkboxes-wrapper">';
+					//echo '<div class="wppl-checkboxes-wrapper">';
 					foreach ($children as $child) {	
 						$child->name = trim ($child->name);
 						$checked =  (in_array ($child->name, $tt ) )? "checked='checked'": ""; 
-						echo '<div class="wppl-single-checkbox"><input ' .$checked . ' type="checkbox" name="'. $field_id. '[]" value="'.$child->name.'" /><span>'.$child->name.'</span></div>';
+						echo '<label><input ' .$checked . ' type="checkbox" name="'. $field_id. '[]" value="'.$child->name.'" />'.$child->name.'</label>';
 					}
-					echo '</div>';
+					//echo '</div>';
 				echo '</div>';
 			break;
 		} // switch
@@ -129,16 +164,15 @@ function bp_fields_dropdown($wppl) {
 }
 
 ///////// query profile fields //////////
-function wppl_bp_query_fields ($total_fields) {
-		global $bp;
-		global $wpdb;
-		global $and_users;
+function wppl_bp_query_fields($total_fields) {
+		global $bp, $wpdb;
 		$empty_fields = array();
-			
+		$userids = false;
+		
 		foreach ($total_fields as $field_id) {
 			
-			$value = $_GET[$field_id];
-			$to = $_GET[$field_id. '_to'];
+			$value = (isset($_GET[$field_id])) ? $_GET[$field_id] : '';
+			$to = (isset($_GET[$field_id. '_to'])) ?  $_GET[$field_id. '_to'] : '';
 			
 			if ($value) array_push($empty_fields, $_GET[$field_id]);
 			
@@ -147,8 +181,8 @@ function wppl_bp_query_fields ($total_fields) {
 				$field_data = new BP_XProfile_Field ($field_id);
 				
 				switch ($field_data->type) {
-				
-					case 'select':
+					
+					case 'selectbox':
 					case 'multiselectbox':
 					case 'checkbox':
 					case 'radio':
@@ -180,86 +214,115 @@ function wppl_bp_query_fields ($total_fields) {
 		
 				$results = $wpdb->get_col ($sql, 0);
 				
-				if (!is_array ($userids)) $userids = $results; else $userids = array_intersect ($userids, $results); 
-									
+				if (!is_array($userids)) $userids = $results; else $userids = array_intersect($userids, $results); 
+							
 				echo '<br />';
 			} // if value //
 		} // for eaech //
-		
-	if ($userids) return $and_users = "AND member_id IN (" . implode( ',' , $userids) . ")";
+	/* build SQL filter from profile fields results - member ids array */
+	if (isset($userids) && !empty($userids) ) return $userids;
+	/* if no results and profile fields are not empty - buba is going to stop the function */ 
 	else if (!empty($empty_fields)) return "buba";	
 } 
 
 /////// query buddypress results /////////
-function wppl_bp_query_results ($params, $wppl, $options) {
+function wppl_bp_query_results($params) {
+	global $wppl, $bp;
+	$wppl_options = get_option('wppl_fields');
+	$get_results = false;
+	$calculate = false;
+	$showing = false;
+	$having = false;
+	$order_by = false;
 	
-	global $wpdb, $wppl, $and_users, $org_address, $unit_a, $pc, $total_fields, $total_results_fields, $lat, $long; ;
-
-	if(!empty( $_GET['action'] ) &&  $_GET['action'] == "wppl_post") {	
+	/* get all existing wp users. in the next sql query we will make sure ///
+	//// the user exists before displaying results. to prevent not active users from being displayed */
+	global $total_wp_users, $wpdb;
+	$mem_query = $all_wp_users = $total_wp_users = $wpdb->get_col("SELECT $wpdb->users.ID FROM $wpdb->users");
+	
+	/* if the search form submitted */
+	if(!empty( $_GET['action'] ) &&  $_GET['action'] == "wppl_post") {
+	
+	/* check if session exists and url is the same */
+	if(!isset($_SESSION['wppl_search_members']) || !isset($_SESSION['wppl_url_members']) || $_SESSION['wppl_url_members'] != remove_query_arg('pagen') ) $session_on = 0; else $session_on = 1;	
 		
-		if (empty($params[form])) {
+		/* if the search form is a widget or different page */
+		if (empty($params['form'])) {
 			$options_r = get_option('wppl_shortcode'); 
 			$wppl = $options_r[$_GET['wppl_form']];
 			ob_start();	
   	 	}
    	
    		extract(shortcode_atts($wppl, $get_results));
-   	
-   		$total_fields = ($profile_fields ) ? $profile_fields : array();
    		
+   		/* when we need to display profile fields in the search form */
+   		$total_fields = ( isset($profile_fields) ) ? $profile_fields : array();
+   		if( isset($profile_fields_date) && !empty($profile_fields_date) ) array_unshift($total_fields, $profile_fields_date);
+   		$userids = wppl_bp_query_fields($total_fields);
+   		
+   		/* when we have date field to display in search form - shift it to the beginning of the array */
 		if($profile_fields_date ) array_unshift($total_fields, $profile_fields_date);
 		
-   		if ($total_fields ) if (wppl_bp_query_fields($total_fields) == "buba") {
+		/* run the profile fields query. if not results returned, stop the function and display no results message */
+   		if (isset($total_fields) && !empty($total_fields) ) if ( $userids == "buba") {
    			wppl_bp_no_members();
-   			if (empty($params[form])) {
+   			if (empty($params['form'])) {
    				$output_results=ob_get_contents();
 				ob_end_clean();
 				return $output_results;
 			} else return;
    		}
    		
-   		// when we need to display profile fields in results //
+   		/* when we need to display profile fields in results */
 		if ($results_profile_fields || $results_profile_fields_date ) {
 			$total_results_fields = ($results_profile_fields ) ? $results_profile_fields : array(); 		
 			if($results_profile_fields_date ) array_unshift($total_results_fields, $results_profile_fields_date);
 		}
    	   		
 		echo '<link rel="stylesheet" type="text/css" media="all" href="' . plugins_url('themes/'.$results_template.'/css/style.css', (__FILE__))  .'">'; 
-   		   			
-		if ($_GET['wppl_units'] == "imperial") { 
-			$unit_a = array('radius' => 3959, 'name' => "Mi", 'map_units' => "ptm", 'units'	=> 'imperial');
-		} else { 
-			$unit_a = array('radius' => 6371, 'name' => "Km", 'map_units' => 'ptk', 'units' => "metric");
-		}
+   		 
+   		 /* array contains units params */ 			
+		if ($_GET['wppl_units'] == "imperial") 
+			$wppl['units_array'] = array('radius' => 3959, 'name' => "Mi", 'map_units' => "ptm", 'units'	=> 'imperial');
+		else  
+			$wppl['units_array'] = array('radius' => 6371, 'name' => "Km", 'map_units' => 'ptk', 'units' => "metric");
 		
  		$radius = $_GET['wppl_distance'];	
 		$from_page = $_GET['pagen'];
 	
-		$org_address = str_replace(" ", "+", $_GET['wppl_address']);
+		$wppl['org_address'] = str_replace(" ", "+", $_GET['wppl_address']);
 
 		/////// CONVERT ORIGINAL ADDRESS TO LATITUDE/LONGITUDE ////	
-		$do_it = ConvertToCoords($org_address);
+		$returned_address = ConvertToCoords($wppl['org_address']);
+		
+		$lat  = $returned_address['lat'];
+		$long = $returned_address['long'];
 			
-		(!empty($org_address)) ? $your_loc = array("Your Location", $lat,$long) : $your_loc = "0";
+		/* set the "your location" icon */
+		(!empty($wppl['org_address'])) ? $your_loc = array("Your Location", $lat,$long) : $your_loc = "0";
 	
 		$order_by = "members.member_id";
-	
-		if (!empty($org_address)) {
-			$calculate = ", ROUND(".$unit_a['radius']. " * acos( cos( radians( $lat ) ) * cos( radians( members.lat ) ) * cos( radians( members.long ) - radians( $long ) ) + sin( radians( $lat ) ) * sin( radians( members.lat) ) ),1 )  AS distance";
-			$having = "HAVING distance <= $radius OR distance IS NULL";
-			$order_by = "distance";
-			$showing = 'within ' . $radius . ' ' . $unit_a['name'] . ' from ' . $_GET['wppl_address'];
+		
+		/* if address field is not empty */ 
+		if (!empty($wppl['org_address'])) {
+			$calculate 	= ", ROUND(".$wppl['units_array']['radius']. " * acos( cos( radians( '%s' ) ) * cos( radians( members.lat ) ) * cos( radians( members.long ) - radians( '%s'  ) ) + sin( radians( '%s' ) ) * sin( radians( members.lat) ) ),1 )  AS distance";
+			$having 	= "HAVING distance <= '%d' OR distance IS NULL";
+			$order_by	= "distance";
+			$showing 	= 'within ' . $radius . ' ' . $wppl['units_array']['name'] . ' from ' . $_GET['wppl_address'];
 		}	
 		$get_them = 1;	
+	/* when user first visit a search page we look for lat/long and display results based on that */
+	} elseif ( ($_COOKIE['wppl_lat']) && ($_COOKIE['wppl_long']) && ($params['form']) && ($wppl_options['auto_search'] == 1) ) {
+	
+	/* check if session exists and url is the same */
+		$session_on =0;
 		
-	
-	} elseif ( ($_COOKIE['wppl_lat']) && ($_COOKIE['wppl_long']) && ($params[form]) && ($options['auto_search'] == 1) ) {
-	
-		global $wpdb, $wppl, $and_users, $org_address, $unit_a, $pc, $total_fields, $total_results_fields, $lat, $long; ;
+		global $wppl;
+		$get_results = false;
 		
 		extract(shortcode_atts($wppl, $get_results));
 		
-		$org_address = str_replace(" ", "+", $_COOKIE['wppl_city']);
+		$wppl['org_address'] = urldecode($_COOKIE['wppl_city']) . ' ' .  urldecode($_COOKIE['wppl_state']) . ' ' .  urldecode($_COOKIE['wppl_zipcode']) . ' ' .  urldecode($_COOKIE['wppl_country']);
    		
    		if ($results_profile_fields || $results_profile_fields_date) {
 			$total_results_fields = ($results_profile_fields ) ? $results_profile_fields : array(); 		
@@ -268,51 +331,71 @@ function wppl_bp_query_results ($params, $wppl, $options) {
    		
    		echo '<link rel="stylesheet" type="text/css" media="all" href="' . plugins_url('themes/'.$results_template.'/css/style.css', (__FILE__))  .'">'; 
     	
-		if ($options['auto_units'] == "imperial") 
-			$unit_a = array('radius' => 3959, 'name' => "Mi", 'map_units' => "ptm", 'units'	=> 'imperial');
+		if ($wppl_options['auto_units'] == "imperial") 
+			$wppl['units_array'] = array('radius' => 3959, 'name' => "Mi", 'map_units' => "ptm", 'units'	=> 'imperial');
 		else 
-			$unit_a = array('radius' => 6371, 'name' => "Km", 'map_units' => 'ptk', 'units' => "metric");
+			$wppl['units_array'] = array('radius' => 6371, 'name' => "Km", 'map_units' => 'ptk', 'units' => "metric");
 		
-		$radius = $options['auto_radius'];
-		$from_page  = ($_GET['pagen']) ? $_GET['pagen'] : 0;
-		$lat = $_COOKIE['wppl_lat'];
-		$long = $_COOKIE['wppl_long'];
-		$your_loc = array("Your Location", $lat,$long);
-		$having = "HAVING distance <= $radius OR distance IS NULL";
-		$order_by = "distance";
-		$calculate = ", ROUND(" . $unit_a['radius'] . "* acos( cos( radians( $lat ) ) * cos( radians( members.lat ) ) * cos( radians( members.long ) - radians( $long ) ) + sin( radians( $lat ) ) * sin( radians( members.lat) ) ),1 )  AS distance";
-		$showing = 'within ' . $radius . ' ' . $unit_a['name'] . ' Near your location';
-			
-		$auto_se = 1;
+		$radius 	= $wppl_options['auto_radius'];
+		$from_page  = (isset($_GET['pagen'])) ? $_GET['pagen'] : 0;
+		$lat 		= urldecode($_COOKIE['wppl_lat']);
+		$long 		= urldecode($_COOKIE['wppl_long']);
+		$your_loc 	= array("Your Location", $lat,$long);
+		$having 	= "HAVING distance <= '%d' OR distance IS NULL";
+		$order_by 	= "distance";
+		$calculate 	= ", ROUND(" . $wppl['units_array']['radius'] . "* acos( cos( radians( '%s' ) ) * cos( radians( members.lat ) ) * cos( radians( members.long ) - radians( '%s' ) ) + sin( radians( '%s' ) ) * sin( radians( members.lat) ) ),1 )  AS distance";
+		$showing 	= 'within ' . $radius . ' ' . $wppl['units_array']['name'] . ' Near your location';
+
 		$get_them = 1;			
 	}
+	/* query and get the results */
+	
+	if( isset($get_them) && !empty($get_them) ) {
+		include_once GMW_FL_PATH . 'template-functions.php';
 		
-	if($get_them) {
+		/* check for results in session */
+		if($session_on == 0) {
+			
+			//add users from profile fields query results
+			if( isset($userids) && !empty($userids) ) $mem_query = $all_wp_users = array_intersect($userids, $all_wp_users);
+			
+			if (isset($lat) && !empty($lat) ) $mem_query = array_merge(array($lat, $long, $lat), $all_wp_users);
+			array_push($mem_query,$radius);
+			
+			$total_ids = $wpdb->get_results( 
+				$wpdb->prepare("SELECT members.* {$calculate} FROM wppl_friends_locator members 
+					WHERE (1=1)
+					{$and_users}
+					AND members.member_id IN (".str_repeat("%d,", count($all_wp_users)-1) . "%d) 
+					{$having} ORDER BY {$order_by}",$mem_query
+				)); 
+    						
+			/* enter results into session var */
+			$_SESSION['wppl_search_members'] = $total_ids;
+			/* enter url into session - need to check if user changed the search query */
+			$_SESSION['wppl_url_members'] = remove_query_arg('pagen');
+			//echo "0";	
+	
+		} elseif ($session_on == 1) {
+			//echo "1";
+			$total_ids = $_SESSION['wppl_search_members'];
+		}
 		
-		$sql ="
-			SELECT members.* {$calculate}
-			FROM " . $wpdb->prefix . "wppl_friends_locator  members	
-    		WHERE (1=1)
-    		{$and_users}
-			{$having} ORDER BY {$order_by}" ;
-					
-		$total_ids = $wpdb->get_results ($sql);
+		if ( isset($total_ids) && !empty($total_ids) ) { 
+			/* divide results into pages */
+			$user_ids = array_chunk($total_ids,$per_page);
+			/// count number of pages ///
+			$pages = count($user_ids);
+			/// users to display ///
+			$user_ids = $user_ids[$from_page];
 		
-		$user_ids = array_chunk($total_ids,$per_page);
-		/// count number of pages ///
-		$pages = count($user_ids);
-		/// posts to display ///
-		$user_ids = $user_ids[$from_page];
-		
-		if ($user_ids) { 
-		
-			if( ($results_type == "both") || ($results_type == "map") ) { $map_yes = 1; } ?>
+			if( ($results_type == "both") || ($results_type == "map") ) $map_yes = 1; ?>
 	
 			<div id="wppl-output-wrapper" style="width:<?php echo ($main_wrapper_width) ? $main_wrapper_width.'px' : '100%'; ?>">
 			
 				<div id="pag-top" class="pagination">
-					<?php if ($map_yes == 1) echo '<div id="show-hide-btn-wrapper"><a href="#" class="map-show-hide-btn"><img src="'.plugins_url('geo-my-wp/images/show-map-icon.png',basename( __FILE__) ).'" /></a></div>'; ?>
-					<div class="pag-count" id="member-dir-count-top" <?php echo ($map_yes) ? 'style="margin-left:20px;"' : ''; ?>>
+					<?php if ( isset($map_yes) && $map_yes == 1) echo '<div id="show-hide-btn-wrapper"><a href="#" class="map-show-hide-btn"><img src="'.GMW_URL .'/images/show-map-icon.png" /></a></div>'; ?>
+					<div class="pag-count" id="member-dir-count-top">
 						Viewing member <?php echo (($from_page * $per_page) +1) ; ?> to <?php echo ($from_page * $per_page) + count($user_ids); ?> (of <?php echo count($total_ids); ?> active members) <?php echo $showing; ?>
 					</div>	
 					<div class="pagination-links" id="member-dir-pag-bottom">
@@ -326,16 +409,18 @@ function wppl_bp_query_results ($params, $wppl, $options) {
 				if ($map_yes == 1) {
 					echo '<div id="wppl-hide-map" style="float:left;">';
 					echo	'<div class="wppl-map-wrapper" style="position:relative">';
-					echo		'<div id="map" style="width:'; echo (!empty($map_width)) ? $map_width : 500 ; echo 'px; height:'; echo (!empty($map_height)) ? $map_height : 500; echo 'px;"></div>';
+					echo		'<div id="wppl-members-map" style="width:'; echo (!empty($map_width)) ? $map_width : 500 ; echo 'px; height:'; echo (!empty($map_height)) ? $map_height : 500; echo 'px;"></div>';
 					echo		'<img class="map-loader" src="'.plugins_url('geo-my-wp/images/map-loader.gif', basename(__file__) ).'" style="position:absolute;top:45%;left:33%;"/>';
 					echo	'</div>';// map wrapper //
 					echo '</div>'; // show hide map //				
 				};	
 				echo	'<div class="clear"></div>';	
 				
+				/* display results */
 				if( ($results_type == "both") || ($results_type == "posts") ) {
-					$pc = ($from_page * $per_page) +1;
-					include(plugin_dir_path(__FILE__) . 'themes/default/results.php'); ?>
+					$pc = ($from_page * $per_page) + 1;	
+					/* include the results.php and themplate-functions pages */
+					include_once GMW_FL_PATH . 'themes/default/results.php'; ?>
 				
 					<div id="pag-bottom" class="pagination">
 						<div class="pag-count" id="member-dir-count-bottom"> 
@@ -350,39 +435,38 @@ function wppl_bp_query_results ($params, $wppl, $options) {
 				<div class="clear"></div>
 				
 				<?php 
-				///// DISPLAY MAP  /////		
-				if ($map_yes == 1) {
-					echo 		'<script type="text/javascript">'; 
-					echo			'avatar= '.json_encode($avatars),';'; 
-					echo 			'locations= '.json_encode($user_ids),';'; 
-					echo 			'your_location= '.json_encode($your_loc),';'; 
-					echo			'page= '.json_encode($from_page * $per_page),';'; 
-					echo 			'mapType= '.json_encode($map_type),';';
-					echo 			'additionalInfo= '.json_encode($additional_info),';';
-					echo			'zoomLevel= '. $zoom_level,';';
-					echo			'autoZoom= '.json_encode($auto_zoom),';';
-					echo 			'friendsSearch="1";';
-					echo 			'perMemberIcon= '.json_encode($per_member_icon),';'; 	
-					echo 			'mainIconsFolder= '.json_encode(plugins_url('geo-my-wp/map-icons/',basename(__file__) ) ),';';
-					echo 			'bpIconsFolder= '.json_encode(plugins_url('map-icons/',__file__ ) ),';';
-					echo			'mainIcon= '.json_encode($map_icon),';';
-					echo			'ylIcon= '.json_encode($your_location_icon),';';
-					echo			'units= '.json_encode($unit_a),';';
-					echo 		'</script>';
-					echo '<script src="'.plugins_url('geo-my-wp/js/infobox.js',basename(__file__) ). '" type="text/javascript"></script>';		
+				/* pass results to javascript to use to display the map and markers */		
+				if ( isset($map_yes) && $map_yes == 1) {
+					if (!isset($map_controls) || empty($map_controls) ) $map_controls = false;
+					$members_map_args = array(
+						'avatar'			=> $avatars,
+						'locations'			=> $user_ids,
+						'your_location'		=> $your_loc,
+						'page'				=> $from_page * $per_page,
+						'mapType'			=> $map_type,
+						'additionalInfo'	=> $additional_info,
+						'zoomLevel'			=> $zoom_level,
+						'autoZoom'			=> $auto_zoom,
+						'friendsSearch'		=> 1,
+						'perMemberIcon'		=> $per_member_icon,
+						'mainIconsFolder'	=> GMW_URL . '/map-icons/',
+						'bpIconsFolder'		=> GMW_FL_URL . 'map-icons/',
+						'mainIcon'			=> $friends_map_icon,
+						'ylIcon'			=> $your_location_icon,
+						'units'				=> $wppl['units_array'],
+						'mapControls'		=> $map_controls
+					);
+					wp_enqueue_script( 'wppl-friends-map', true);
+					wp_localize_script( 'wppl-friends-map', 'fMapArgs', $members_map_args);
 				};	
-				
-				wp_enqueue_script( 'wppl-friends-map', true);
-		
 			echo '</div>';
-				
 		} else {
 			echo '<div id="message" class="info" style="float:left; width:100%;">';
-				echo '<p>'; echo _e( "Sorry, no members were found.", 'buddypress' );echo ($options['wider_search']) ? '  <a href="'. add_query_arg('wppl_distance', $options['wider_search_value']). '" onclick="document.wppl_form.submit();">click here</a> to search wihtin a greater range or <a href="'. add_query_arg('wppl_address', ''). '" onclick="document.wppl_form.submit();">click here</a> to see all results. </p>' : ''; echo '';
+				echo '<p>'; echo _e( "Sorry, no members were found.", 'buddypress' );echo ($wppl_options['wider_search']) ? '  <a href="'. add_query_arg('wppl_distance', $wppl_options['wider_search_value']). '" onclick="document.wppl_form.submit();">click here</a> to search within a greater range or <a href="'. add_query_arg('wppl_address', ''). '" onclick="document.wppl_form.submit();">click here</a> to see all results. </p>' : ''; echo '';
 			echo '</div>';
 		}
-		
-		if (empty($params[form])) {
+		/* end the function */
+		if (empty($params['form'])) {
    			$output_results=ob_get_contents();
 			ob_end_clean();
 			return $output_results;
@@ -391,10 +475,11 @@ function wppl_bp_query_results ($params, $wppl, $options) {
 } 
 add_shortcode( 'wppl_friends_results' , 'wppl_bp_query_results' );
 
+/* no results message */
 function wppl_bp_no_members() {
-	global $options;
 	echo '<div id="message" class="info" style="float:left; width:100%;">';
 		echo '<p>'; echo _e( "Sorry, no members were found.", 'buddypress' );
 	echo '</div>';
-	}
+}
+
 ?>

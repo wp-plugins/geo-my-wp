@@ -1,59 +1,68 @@
 <?php
 
 /////// TITLE ///////////
-function wppl_bp_title() {
-	global $user_data;
+function wppl_bp_title($single_user) {
 	echo '<div class="wppl-item-title">';
-	echo	'<a href="' . $user_data->user_url . '">'. $user_data->fullname . '</a>';
+	echo	'<a href="' . $single_user->user_permalink . '">'. stripslashes($single_user->full_name) . '</a>';
 	echo '</div>';
 	}
 	
 ///////// THUMBNAIL ///////////////
-function wppl_bp_thumbnail() {
-	global $user_data, $wppl;
-	if($wppl['show_thumb']) {
-		echo '<div class="wppl-item-avatar">';
-		echo "<style> .item-avatar img { width:$wppl[thumb_width]px !important; height:$wppl[thumb_height]px !important; } </style>";
-			echo '<a href="' . $user_data->user_url . '">'. $user_data->avatar_thumb . '</a>';
-		echo '</div>';
-	}	
+function wppl_bp_thumbnail($wppl, $single_user) {
+	if( !isset($wppl['show_thumb']) || $wppl['show_thumb'] != 1 ) return;
+	echo '<div class="wppl-item-avatar">';
+	echo "<style> .wppl-item-avatar img { width:$wppl[thumb_width]px !important; height:$wppl[thumb_height]px !important; } </style>";
+		echo '<a href="' . $single_user->user_permalink . '">'. $single_user->avatar . '</a>';
+	echo '</div>';
+}
+
+function wppl_bp_display_address($wppl, $single_user) {
+	echo '<div class="wppl-bp-address">';
+	echo 	'<span>Address: </span>';
+	echo $single_user->address . ' ';
+	echo '</div>';
+}
+
+if ( !function_exists('wppl_bp_user_profile_fields') ) {
+	function wppl_bp_user_profile_fields() {
+		return;
+	}
 }
 
 ////////// ACTION BUTTONS //////
-function wppl_bp_action_btn() {
-	global $bp, $single_user;
-	echo '<div class="wppl-action">';
-		$friend_status = friends_check_friendship_status( $bp->loggedin_user->userdata->ID,$single_user->member_id); 
-		echo bp_get_add_friend_button( $single_user->member_id, $friend_status ); 
-	echo '</div>';
+function wppl_bp_action_btn($single_user) {
+	global $bp;
+	$logged_in = ( isset($bp->loggedin_user->id) ) ? $bp->loggedin_user->id : '';
+	$member_id = ( isset($single_user->member_id) ) ? $single_user->member_id : '';
+	
+	if( isset($bp->active_components['friends']) &&  $bp->active_components['friends'] == 1) {
+		echo '<div class="wppl-action">';
+			$friend_status = friends_check_friendship_status( $logged_in , $member_id); 
+			echo bp_get_add_friend_button( $member_id, $friend_status ); 
+		echo '</div>';
+		}
    	}
    	
 ////////// BY RADIUS ///////////
-function wppl_bp_by_radius () {
-	global $lat, $long, $single_user, $unit_a;
-		if ($lat && $long) echo '<div class="bp-radius-wrapper">' . $single_user->distance .' ' . $unit_a['name'] . '</div>'; 
+function wppl_bp_by_radius ($returned_address, $single_user, $wppl) {
+		if ($returned_address['lat'] && $returned_address['long']) echo '<div class="bp-radius-wrapper">' . $single_user->distance .' ' . $wppl['units_array']['name'] . '</div>'; 
 	}
 		
 //////// GET DIRECTIONS ////////////
-function wppl_bp_directions() {
-	global $wppl, $single_user, $org_address, $unit_a;
-	if ($wppl['get_directions']) { 			 	
-    	echo '<div class="bp-get-directions">'; 
-    	echo 	'<span><a href="http://maps.google.com/maps?f=d&hl=en&doflg=' . $unit_a['map_units'] . '&geocode=&saddr=' .$org_address . '&daddr=' . str_replace(" ", "+", $single_user->address) . '&ie=UTF8&z=12" target="_blank">Get Directions</a></span>';
-		echo '</div>';
+
+if ( function_exists('wppl_bp_directions') ) {
+	return;
+} else {
+	function wppl_bp_directions($wppl, $single_user) {
+		if ( isset($wppl['get_directions']) && $wppl['get_directions'] == 1 ) { 	
+			echo '<div class="bp-get-directions">'; 
+			echo 	'<span><a href="http://maps.google.com/maps?f=d&hl=en&doflg=' . $wppl['units_array']['map_units'] . '&geocode=&saddr=' .$wppl['org_address'] . '&daddr=' . str_replace(" ", "+", $single_user->address) . '&ie=UTF8&z=12" target="_blank">Get Directions</a></span>';
+			echo '</div>';
+		}
 	}
 }
-
-/////// ADDRESS ///////////
-function wppl_bp_address() {
-	global $single_user, $wppl;
-	echo '<div class="wppl-bp-address">';
- 	echo 	'<span>Address: </span>' . $single_user->address; 
-	echo '</div>';
-	} 
 	
-function wppl_bp_last_active() {
-	global $user_data;
+function wppl_bp_last_active($user_data) {
 	echo '<div class="wppl-item-meta">';
 		echo '<span class="activity">';
 			echo $user_data->last_active; 
@@ -61,40 +70,15 @@ function wppl_bp_last_active() {
 	echo '</div>';
 	}
 
-
 //////// DRIVING DISTANCE ///////////
-
-/////// CALCULATE DRIVING DISTANCE ////////
-/* function distance_between($des_lat,$des_long) {  			 	
-  	global $distance_between, $lat, $long, $directions, $org_address, $unit, $wppl_units;
-  	
-   $ci = curl_init();
-   	curl_setopt($ci, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ci, CURLOPT_USERAGENT, "Mozilla/2.0 (compatible; MSIE 3.02; Update a; AK; Windows 95)");
-	curl_setopt($ci, CURLOPT_HTTPGET, true);
-	curl_setopt($ci, CURLOPT_URL, 'http://maps.googleapis.com/maps/api/directions/xml?origin=' . $lat . "," . $long . '&destination=' .  $des_lat . "," . $des_long .  '&units=' . $wppl_units . '&sensor=true'  );
-	curl_setopt($ci, CURLOPT_CONNECTTIMEOUT, 60);
-	$got_xml = curl_exec($ci);		
-   	$xml_distance = new SimpleXMLElement($got_xml);
-   	list($distance_between) = explode(",", $xml_distance->route->leg->distance->text);		
-}
-function driving_distance($by_driving, $single_result) {
-	if ($by_driving == 1) { 
-		distance_between($single_result->lat, $single_result->long); ?>
-    					<span class="drive-dis">Driving: <?php echo $distance_between; ?></span> 
-    				<?php	} ?>
-    				
-*/
-	
-function bp_distance_between() {
-	global $wppl, $single_user, $lat, $long, $pc, $unit_a;
-	if ($wppl['by_driving']) { 
+function bp_distance_between($wppl, $single_user, $returned_address, $pc) {
+	if ( !isset($wppl['by_driving']) || $wppl['by_driving'] != 1 ) return;
 	echo '<script>';
-	echo		'latitude= '.json_encode($lat),';'; 
-    echo		'longitude= '.json_encode($long),';'; 
+	echo		'latitude= '.json_encode($returned_address['lat']),';'; 
+    echo		'longitude= '.json_encode($returned_address['long']),';'; 
     echo		'des_lat= '.json_encode($single_user->lat),';'; 
     echo		'des_long= '.json_encode($single_user->long),';';
-    echo		'unit= '.json_encode($unit_a['name']),';';
+    echo		'unit= '.json_encode($wppl['units_array']['name']),';';
     echo		'pc= '.json_encode($pc),';'; 
     echo '</script>';
 	?>
@@ -104,10 +88,10 @@ function bp_distance_between() {
 		var directionsDisplay;
         directionsDisplay = new google.maps.DirectionsRenderer();	
   		var start = new google.maps.LatLng(latitude,longitude);
-  		var end = new google.maps.LatLng(des_lat,des_long);
+  		//var end = new google.maps.LatLng(des_lat,des_long);
   		var request = {
     		origin:start,
-    		destination:end,
+    		destination:'<?php echo $single_user->address; ?>',
     		travelMode: google.maps.TravelMode.DRIVING
  		};
  		
@@ -130,5 +114,4 @@ function bp_distance_between() {
 	<?php
 	//echo 	'<div id="wppl-directions-panel-'. $pc .'"></div>';
 	echo 	'<div class="bp-driving-distance" id="bp-driving-distance-' .$pc . '"></div>';
-	}
 }
