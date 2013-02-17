@@ -1,19 +1,22 @@
 /* settings page */ 
 
+h2 {
+	border:0 !important;
+}
+
 #icon-wppl {
     background: transparent url('../images/admin-setting-locator.png') no-repeat;
 }
 
 table.fixed {
-	margin: 5px 0;
+	//margin: 5px 0;
 	}
 	
 .wppl-settings span, .wppl-settings label {	
 	float:left;
 	}
 
-.wppl-settings span.wppl-help-message {
-	
+.wppl-settings span.wppl-help-message {	
 	padding: 5px 5px;
 	background: #cee2f0;
 	border: 1px solid #bbb;
@@ -36,12 +39,13 @@ table.widefat tr td p.wppl-write-shortcode  {
 ul.wppl-shortcodes-list li {
 	list-style:none;
 	}
-form.wppl-shortcode-submit {
+
+/*form.wppl-shortcode-submit {
 	padding: 5px;
 	background: #f6f6f6;
 	border: 1px solid #ddd;
 	margin-top: -2px;
-}
+} */
 
 .wppl-settings p {	
 	float:left;
@@ -132,6 +136,11 @@ input[type="checkbox"], input[type="radio"] {
    vertical-align: middle;
    }
    
+.wppl-edit, .wppl-shortcodes-help-btn {
+	margin-right:5px !important;
+	padding: 0 5px !important;
+}
+
 .wppl-edit-btn:hover, #create-new-shortcode:hover {
    border-top-color: #5789ab;
    background: #5789ab;
@@ -179,6 +188,21 @@ input[type="checkbox"], input[type="radio"] {
 	color:red;
 	margin-left:10px;
 	font-size:13px;
-	}
+}
+
+.add-on-image img {
+	width: 20px;
+	height: 20px;
+	margin-right: 9px;
+}
+
+.wppl-icons-list-name {
+	float: left;
+	font-size: 14px;
+	padding: 3px;
+	text-shadow: 1px 1px 1px white;
+	color: #21759B;
+	float:left;
+}
 	
 	

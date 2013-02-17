@@ -1,55 +1,50 @@
 <ul class="wppl-shortcodes-list" style="margin:0;">
-	<?php $yy = 0; $hide_not = array(); $hide_yes = array();
+	<?php $yy = 0; $hide_not = array(); $hide_yes = array(); $posts_type = array(); $friends_type = array(); $groups_type = array();
 		
 			if (!empty($options_r)) {
 				$tt = array_keys($options_r);
 				foreach ($options_r as $option) :
 					$e_id = $tt[$yy]; // element id //
-		
-					if ($option['friends_search']) {
-						array_push($hide_not, $e_id);
-						array_push($hide_yes, '0');
-						echo '<script type="text/javascript">'; 
-						echo 	'hideNot= '.json_encode($hide_not),';';
-						echo 	'hideYes= '.json_encode($hide_yes),';'; 
-						echo '</script>';		
-					} else {
-						array_push($hide_yes, $e_id);
-						array_push($hide_not, '0');
-						echo '<script type="text/javascript">'; 
-						echo 	'hideYes= '.json_encode($hide_yes),';'; 
-						echo 	'hideNot= '.json_encode($hide_not),';'; 
-						echo '</script>';	
-					} ?>
-				
+					
+					if(!$option['form_type']) {
+						if ($option['friends_search']) { $option['form_type'] = 'friends' ;} else  { $option['form_type'] = 'posts' ;}
+					}
+					
+					if ($option['form_type'] == 'posts') {
+						array_push($posts_type, $e_id);
+					} elseif ($option['form_type'] == 'friends') {
+						array_push($friends_type, $e_id);
+					} elseif ($option['form_type'] == 'groups') {
+						array_push($groups_type, $e_id);
+					}
+					
+					echo '<script type="text/javascript">'; 	
+						echo 	'postsType= '.json_encode($posts_type),';'; 
+						echo 	'friendsType= '.json_encode($friends_type),';'; 
+						echo 	'groupsType= '.json_encode($groups_type),';';
+					echo '</script>';		
+					
+					 ?>
+			
 			<li class="wppl-shortcode-info-holder" id="wppl-shortcode-info-holder-<?php echo $e_id; ?>">
 			
 			<table class="widefat" style="margin-bottom: -2px;" id="shortcode-header-table-<?php echo $e_id; ?>">
+				<input type="hidden" name="<?php echo 'wppl_shortcode['.$e_id.'][form_type]'; ?>" value="<?php echo $option[form_type];?>">
 				<input type="hidden" name="<?php echo 'wppl_shortcode['.$e_id.'][form_id]'; ?>" value="<?php echo $e_id;?>">
 				<thead>
 					<th>
-						<div class="wppl-settings">
-							<span>
-								<span><h4><?php echo _e('Copy this shortcode and paste it into any page to display the search form and results','wppl'); ?></h4></span>
-								<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
-							</span>
-							<div class="clear"></div>
-							<span class="wppl-help-message">
-							<p style="font-size: 13px;font-weight: normal;"><?php _e('This is the main shortcode that displays the search form and the results. 
-									Click on the "Edit" button to choose the setting of the shortcode and when you done click "Save". 
-									copy the shortcode and paste in the page where you want the search form and the results to be displayed. 
-									you can also choose this shortcode using the search form widget to display the search form in the sidebar.
-									if you want to display only the search form in one page and have the results being displayed in a different page 
-									you need to use the shortcode like "[wppl form="'.$e_id.'" form_only="y"] and you need to choose the results page in the main setting page.', 'wppl'); ?>
-							</p></span>
-						</div>	
-					</th>
-					<th><?php if ($option['friends_search']) { ?>
-							<img src="<?php echo plugins_url('/geo-my-wp/images/bp-icon.png'); ?>" width="40px" height="40px" style="float:left;" /> 
-						<?php } else { ?>
-							<img src="<?php echo plugins_url('/geo-my-wp/images/wp-icon.png'); ?>" width="40px" height="40px" style="float:left;" /> 
+						<?php if ($option['form_type'] == 'posts') { ?>
+							<img src="<?php echo plugins_url('/geo-my-wp/admin/images/wp-icon.png'); ?>" width="40px" height="40px" style="float:left;" /> <span style="fonr-weight:bold;font-size:14px;float:left;padding: 10px;">Post types search form </span>
+						<?php } elseif ($option['form_type'] == 'friends') { ?>
+							<img src="<?php echo plugins_url('/geo-my-wp/admin/images/bp-members-icon.png'); ?>" width="40px" height="40px" style="float:left;" /> <span style="fonr-weight:bold;font-size:14px;float:left;padding: 10px;">BP Friends search form</span>
+						<?php } elseif ($option['form_type'] == 'groups') { ?>
+							<img src="<?php echo plugins_url('/geo-my-wp/admin/images/bp-groups-icon.png'); ?>" width="40px" height="40px" style="float:left;" /> <span style="fonr-weight:bold;font-size:14px;float:left;padding: 10px;">BP Groups search form</span>
 						<?php }?>
-						<p style="float:left;margin-top:10px;margin-left:10px;color: #21759B;">[wppl form="<?php echo $e_id; ?>"]</p></th>
+						<p style="float:left;margin-top:10px;margin-left:10px;color: #21759B;">[wppl form="<?php echo $e_id; ?>"]</p>
+					</th>
+					<th>
+						<h4><?php echo _e('Copy this shortcode <code style="font-size:12px;color: #21759B;">[wppl form="'.$e_id.'"]</code>and paste it into any page to display the search form and results','wppl'); ?></h4>
+					</th>
 				</thead>
 				<tr>
 					<td>
@@ -61,64 +56,53 @@
 				</tr>
 			</table>
 			
+			<!-- shortcode starts here -->
+			
 			<div class="edit-shortcode-<?php echo $e_id; ?>" style="display:none">
 				<table class="widefat" id="shortcode-table-<?php echo $e_id; ?>">
-					<tr style=" height:40px;">
-						<td>
-						<div class="wppl-settings">
-							<p>
-							<span>
-							<img class="wppl-bp-icon" src="<?php echo plugins_url('/geo-my-wp/images/bp-icon.png'); ?>" width="40px" height="40px" style="float:left;" />
-							<label for="label-post-types-<?php echo $e_id; ?>" style="float:left;margin-top:10px;margin-left:10px;">
-							<strong style="font-size:12px;"><?php echo _e('This is Buddypress search form:','wppl'); ?></strong></label></span>
-									<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
-								</span>
-								<?php echo (!$wppl_on['friends']) ? '<span class="wppl-turnon-message"> (Turn on "Friends Finder" feature in the Add-ons page in order to use this feature)</span>' : ''; ?> 
-								<div class="clear"></div>
-								<span class="wppl-help-message">
-									<?php _e('Check this checkbox if you are creating a Buddypress search form. Otherwise leave it empty for a post type search form. ', 'wppl'); ?>
-								</span>
-							</p>
-						</div>
-						</td>
-						<td>
-							<p><input type="checkbox" name="<?php echo 'wppl_shortcode[' .$e_id .'][friends_search]'; ?>" value="1" style="margin-left: 10px;" class="friends-check-btn" id="<?php echo 'shortcode-table-'.$e_id; ?>"  <?php echo ($option['friends_search']) ? " checked=checked " : ""; echo( !$wppl_on['friends'] ) ? "disabled" : "";?>></p>
-						</td>
-					</tr>
 					<th><?php echo _e('Search form:' , 'wppl'); ?></th>
 					<th></th>		
 
-					<tr style="height:40px;" class="friends-not">
+					<tr style="height:40px;" class="post-types-yes">
 						<td>
 							<p><label for="label-post-types-<?php echo $e_id; ?>"><?php echo _e('Post types:','wppl'); ?></label></p>
 						</td>
-						<td id="posts-checkboxes-<?php echo $e_id; ?>" <?php if (!$option['post_types']) { echo 'style="background: #FAA0A0"' ;}; ?>>
+						<td class="posts-checkboxes-wrapper" id="<?php echo $e_id; ?>" <?php if (!$option['post_types']) { echo 'style="background: #FAA0A0"' ;}; ?>>
 							<?php foreach ($posts as $post) { ?>
-							<p><input type="checkbox" name="<?php echo 'wppl_shortcode[' .$e_id .'][post_types][]'; ?>" value="<?php echo $post; ?>" style="margin-left: 10px;" id="<?php echo $e_id; ?>" onchange="change_it(this.name,this.id);" <?php if ($option['post_types']) { echo (in_array($post, $option['post_types'])) ? ' checked=checked' : '';} ?>>&nbsp;&nbsp;<?php echo get_post_type_object($post)->labels->name; ?></p>
+							<p><input type="checkbox" name="<?php echo 'wppl_shortcode[' .$e_id .'][post_types][]'; ?>" value="<?php echo $post; ?>" style="margin-left: 10px;" id="<?php echo $post . '_' .$e_id; ?>" class="post-types-tax" <?php if ($option['post_types']) { echo (in_array($post, $option['post_types'])) ? ' checked=checked' : '';} ?>>&nbsp;&nbsp;<?php echo get_post_type_object($post)->labels->name; ?></p>
 							<?php } ?>
 						</td>
 					</tr>
-			
-					<tr style=" height:40px;" class="friends-not" >
+								
+					<tr style=" height:40px;" class="post-types-yes groups-not friends-not" >
 					 	<td>
 							<p><label for="label-taxonomies-<?php echo $e_id; ?>"><?php echo _e('Taxonomies: (no taxonomies for multiple post types):','wppl'); ?></label></p>
 						</td>
-						<td class="taxes-<?php echo $e_id; ?>" style=" padding: 8px;">
+						<td id="taxes-<?php echo $e_id; ?>" style=" padding: 8px;">
 							<?php foreach ($posts as $post) {
 									$taxes = get_object_taxonomies($post);
-									echo '<div id="' . $post . '_cat_' . $e_id . '" '; echo ((count($option['post_types']) == 1) && (in_array($post, $option['post_types']))) ? 'style="display: block; " ' : 'style="display: none;"'; echo '>';
-									foreach ($taxes as $tax) { 
-				 						if (is_taxonomy_hierarchical($tax)) { 
-											echo '<p><input type="checkbox" name="wppl_shortcode[' .$e_id .'][taxonomies][]" value="' . $tax .'" '; if($option['taxonomies']) { echo (in_array($tax , $option['taxonomies'])) ? "checked=checked" : "";}; echo  ' style="margin-left: 10px; " />&nbsp;&nbsp;' . get_taxonomy($tax)->labels->singular_name . '</p>';
+									echo '<div id="' . $post . '_' . $e_id .'_cat' . '" class="taxes-wrapper" '; echo ((count($option['post_types']) == 1) && (in_array($post, $option['post_types']))) ? 'style="display: block; " ' : 'style="display: none;"'; echo '>';
+										foreach ($taxes as $tax) { 
+											if (is_taxonomy_hierarchical($tax)) { 
+									
+												echo '<div style="border-bottom:1px solid #eee;padding-bottom: 10px;margin-bottom: 10px;">
+																											
+														<strong>'. get_taxonomy($tax)->labels->singular_name . ':</strong>
+														<span>
+															<input type="radio" class="radio-na" name="wppl_shortcode[' .$e_id .'][taxonomies]['.$tax.']" value="na" '; if( $option['taxonomies'][$tax] == 'na' ) { echo  "checked=checked"; }; echo  ' style="margin-left: 10px; " />Exclude
+															<input type="radio" name="wppl_shortcode[' .$e_id .'][taxonomies]['.$tax.']" value="drop" '; if( $option['taxonomies'][$tax] == 'drop' ) { echo  "checked=checked"; }; echo  ' style="margin-left: 10px; " />Dropdown
+															<input type="radio" name="wppl_shortcode[' .$e_id .'][taxonomies]['.$tax.']" value="check" '; if( $option['taxonomies'][$tax] == 'check' ) { echo  "checked=checked"; }; echo  ' style="margin-left: 10px; " '; if (GMW_VERSION != 'premium') echo "disabled"; echo '/>Checkboxes
+														</span>
+													</div>';
+											}
 										}
-									}
 									echo '</div>';
 								} ?>
 						</td>
 					</tr>
-					
+					<!-- <p><strong>Category: </strong><input type="checkbox" name="wppl_shortcode[' .$e_id .'][taxonomies][]" value="' . $tax .'" '; if($option['taxonomies']) { echo (in_array($tax , $option['taxonomies'])) ? "checked=checked" : "";}; echo  ' style="margin-left: 10px; " />&nbsp;&nbsp;' . get_taxonomy($tax)->labels->singular_name . '</p>	-->
 					<?php if ($wppl_on['friends']) { ?>
-					<tr style="height:40px;" class="friends-yes">
+					<tr style="height:40px;" class="post-types-not groups-not friends-yes">
 						<td>
 						<div class="wppl-settings">
 							<p>
@@ -134,12 +118,13 @@
 						</div>		
 						</td>
 						<td id="profile-fields-checkboxes-<?php echo $e_id; ?>">
-							<p><?php wppl_bp_admin_profile_fields($e_id, $option, 'profile_fields'); ?></p>	
+							<p><?php global $bp; wppl_bp_admin_profile_fields($e_id, $option, 'profile_fields'); ?></p>	
 						</td>
 					</tr>
 					<?php } ?>
 					
-			
+					<?php do_action('wppl_sf_shortcodes_before_address_field' , $wppl_on, $wppl_options, $option, $e_id); ?>
+					
 					<tr style=" height:40px;">
 						<td>
 						<div class="wppl-settings">
@@ -218,10 +203,44 @@
 							</select>			
 						</td>
 					</tr>
+					
+					<tr>
+						<td>
+						<div class="wppl-settings">
+							<p>
+							<span>
+								<span><?php _e('Locator icon:', 'wppl'); ?></span>
+								<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
+							</span>
+							<div class="clear"></div>
+								<span class="wppl-help-message"><?php _e('Choose if to display the locator button in the search form. This button will get the user&#39;s current location and submit the search form based of that. you can choose one of the default icons or you can add icon of your own. ', 'wppl'); ?></span>
+							</p>
+						</div>
+						</td>
+						<td>
+							<p>
+							<span style="float:left"><input name="<?php echo 'wppl_shortcode[' .$e_id .'][locator_icon][show]'; ?>" type="checkbox" value="1" <?php if ($option['locator_icon'][show] == 1) echo ' checked="checked"'; ?>/>
+								<?php echo _e('Yes','wppl'); ?>
+								&nbsp;&nbsp;&#124;&nbsp;&nbsp;
+							</span>
+							<span style="width:365px;float:left;margin-left:10px;">	
+								<?php $locator_icons = glob(GMW_PATH . '/images/locator-images/*.png');
+								$display_icon = GMW_URL. '/images/locator-images/';
+								foreach ($locator_icons as $locator_icon) { ?>
+								<span style="float:left;">
+									<input type="radio" name="<?php echo 'wppl_shortcode[' .$e_id .'][locator_icon][icon]'; ?>" value="<?php echo basename($locator_icon); ?>" <?php if ($option['locator_icon']['icon'] == basename($locator_icon) ) echo  ' checked="checked"'; ?> />
+									<img src="<?php echo $display_icon.basename($locator_icon); ?>" height="30px" width="30px"/>
+									&nbsp;&nbsp;&#124;&nbsp;&nbsp;
+								</span>
+								<?php } ?>
+							</span>
+							</p>	
+						</td>
+					</tr>
 			
 					<th><?php echo _e('Results','wppl'); ?></th>
 					<th></th>
-					<tr style=" height:40px;" class="friends-not">
+					<tr style=" height:40px;" class="post-types-yes groups-not friends-not">
 						<td>
 						<div class="wppl-settings">
 							<p>
@@ -240,17 +259,32 @@
 						<td>
 							<p> 
 							<select name="<?php echo 'wppl_shortcode[' .$e_id .'][results_template]'; ?>">
-								<option value="custom" <?php echo ($option['results_template'] == "custom" ) ? 'selected="selected"' : ""; ?>>Custom</option>			
-								<option value="default" <?php echo ($option['results_template'] == "default" ) ? 'selected="selected"' : ""; ?>>Default</option>						
-								<option value="restaurants" <?php echo ($option['results_template'] == "restaurants" ) ?'selected="selected"' : ""; if ($plugins_options['restaurant_on'] != 1) {echo 'disabled';} ?>>Restaurant</option>
-								<option value="real-estate" <?php echo ($option['results_template'] == "real-estate" ) ?'selected="selected"' : ""; if ($plugins_options['estate_on'] != 1) {echo 'disabled';} ?>>Real Estate</option>
+								<?php foreach ( glob(GMW_PT_PATH .'themes/*', GLOB_ONLYDIR) as $dir ) { ?>
+									<option value="<?php echo basename($dir); ?>" <?php if ($option['results_template'] == basename($dir) ) echo 'selected="selected"'; ?>><?php echo basename($dir); ?></option>
+								<?php } ?>
+								
 							</select>
 							</p>
 						</td>
 					</tr>
 					
 					<?php if ($wppl_on['friends']) { ?>
-					<tr style=" height:40px;" class="friends-yes">
+					<tr style=" height:40px;" class="post-types-not groups-not friends-yes">
+						<td>
+							<p><label for="label-styling-<?php echo $e_id; ?>"><?php echo _e('Results template:','wppl'); ?></label></p>
+						</td>
+						<td>
+							<p> 
+							<select name="<?php echo 'wppl_shortcode[' .$e_id .'][results_template]'; ?>">
+								<option value="default" <?php echo ($option['results_template'] == "default" ) ? 'selected="selected"' : ""; ?>>Default</option>						
+							</select>
+							</p>
+						</td>
+					</tr>
+					<?php } ?>
+					
+					<?php if ($wppl_on['groups']) { ?>
+					<tr style=" height:40px;" class="post-types-not groups-yes friends-not">
 						<td>
 							<p><label for="label-styling-<?php echo $e_id; ?>"><?php echo _e('Results template:','wppl'); ?></label></p>
 						</td>
@@ -264,7 +298,7 @@
 					</tr>
 					<?php } ?>
 			
-					<tr style=" height:40px;">
+					<tr style=" height:40px;" class="grand-map-not">
 						<td>
 						<div class="wppl-settings">
 							<p>
@@ -308,7 +342,7 @@
 						</td>
 					</tr>
 					
-					<tr style=" height:40px;">
+					<tr style=" height:40px;" class="grand-map-not">
 						<td>
 						<div class="wppl-settings">
 							<p>
@@ -352,114 +386,90 @@
 							</select><?php echo _e('(will not count if auto zoom is checked)','wppl'); ?></p>
 						</td>
 					</tr>
-			
-					<tr style=" height:40px;">
-						<td>
-						<div class="wppl-settings">
-							<p>
-								<span>
-									<label for="label-display-results-<?php echo $e_id; ?>"><?php _e('Google map icon:','wppl'); ?></label>
-									<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
-									<span class="wppl-premium-message"></span>
-								</span>
-								<div class="clear"></div>
-								<span class="wppl-help-message">
-									<?php _e('Choose the global icon for google map. All results will use this icon to show its location on the map unless you check the "per post icon" checkbox below.', 'wppl'); ?>
-								</span>
-							</p>
-						</div>	
-						</td>
-						<td class="wppl-premium-version-only">
-							<p style="float:left;width:500px;">
-							<?php $map_icons = glob(plugin_dir_path(dirname(__FILE__)) . 'map-icons/main-icons/*.png');
-								$display_icon = plugins_url('/geo-my-wp/map-icons/main-icons/');
-								foreach ($map_icons as $map_icon) {
-									echo '<span style="float:left;"><input type="radio" name="wppl_shortcode[' .$e_id .'][map_icon]" value="'.basename($map_icon).'"'; echo ($option['map_icon'] == basename($map_icon) ) ? "checked" : ""; echo ' />
-									<img src="'.$display_icon.basename($map_icon).'" height="40px" width="35px"/></span>';
-								} ?>
-							</p>	
-						</td>
-					</tr>
 					
-					<tr style=" height:40px;">
+					<tr style=" height:40px;" class="grand-map-yes">
 						<td>
 						<div class="wppl-settings">
 							<p>
 								<span>
-									<label for="label-display-results-<?php echo $e_id; ?>"><?php _e('"Your location" icon:','wppl'); ?></label>
+									<label for="label-display-results-<?php echo $e_id; ?>"><?php echo _e('Google Map:','wppl'); ?></label>
 									<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
-									<span class="wppl-premium-message"></span>
 								</span>
 								<div class="clear"></div>
 								<span class="wppl-help-message">
-									<?php _e('Choose the icon that will show the user location on the map.', 'wppl'); ?>
+									<?php _e('Settings for the main google map. Define its height and width in PX otherwise it will by 500 X 500. Choose the map type from the dropdown menu . check the "auto zoom" checkbox if you want all the markers to fit in the map or you can choose a custom zoom level from the dropdown menu.', 'wppl'); ?>
 								</span>
 							</p>
 						</div>	
 						</td>
-						<td class="wppl-premium-version-only">
-							<p style="float:left;width:500px;">
-							<?php $yl_icons = glob(plugin_dir_path(dirname(__FILE__)) . 'map-icons/your-location-icons/*.png');
-								$display_yl_icon = plugins_url('/geo-my-wp/map-icons/your-location-icons/');
-								foreach ($yl_icons as $yl_icon) {
-									echo '<span style="float:left;"><input type="radio" name="wppl_shortcode[' .$e_id .'][your_location_icon]" value="'.basename($yl_icon).'"'; echo ($option['your_location_icon'] == basename($yl_icon) ) ? "checked" : ""; echo ' />
-									<img src="'.$display_yl_icon.basename($yl_icon).'" height="40px" width="35px"/></span>';
-								} ?>
-							</p>	
-						</td>
-					</tr>
-			
-					<tr style=" height:40px;" class="friends-not">
 						<td>
-							<div class="wppl-settings">
-							<p>
-								<span>
-									<label for="label-per-post-icon-<?php echo $e_id; ?>"><?php echo _e('Per post map&#39;s icon:', 'wppl'); ?></label>
-									<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
-									<span class="wppl-premium-message"></span>
-								</span>
-								<div class="clear"></div>
-								<span class="wppl-help-message">
-									<?php _e('Check this checkbox if you want each post to use its own google map icon. ', 'wppl'); ?>
-								</span>
-							</p>
-						</div>
-						</td>
-						<td class="wppl-premium-version-only">
-							<p>
-							<input type="checkbox" name="<?php echo 'wppl_shortcode[' .$e_id .'][per_post_icon]'; ?>" <?php echo ( isset($option['per_post_icon']) ) ? " checked=checked " : ""; echo ' value="1" '; echo( !$wppl_on['per_post_icon'] ) ? "disabled" : ""; ?>>
-							<?php echo _e('Yes','wppl'); ?>
-							</p>
+							<p style="line-height: 40px;">
+							<?php echo _e('Width:','wppl'); ?>
+							&nbsp;<input type="text" onkeyup="this.value=this.value.replace(/[^\d]/,'')" name="<?php echo 'wppl_shortcode[' .$e_id .'][map_width][value]'; ?>" value="<?php echo $option[map_width][value]; ?>" size="2">
+							<select name="<?php echo 'wppl_shortcode[' .$e_id .'][map_width][units]'; ?>">
+								<option value="px" <?php if ($option[map_width][units] == 'px') echo 'selected="selected"'; ?>>Px</option>
+								<option value="%" <?php if ($option[map_width][units] == '%') echo 'selected="selected"'; ?>>%</option>
+							</select>
+							&nbsp;&nbsp;&#124;&nbsp;&nbsp;
+							<?php echo _e('height:','wppl'); ?>
+							&nbsp;<input type="text" onkeyup="this.value=this.value.replace(/[^\d]/,'')" name="<?php echo 'wppl_shortcode[' .$e_id .'][map_height][value]'; ?>" value="<?php echo $option['map_height'][value]; ?>" size="2">
+							<select name="<?php echo 'wppl_shortcode[' .$e_id .'][map_height][units]'; ?>">
+								<option value="px" <?php if ($option[map_height][units] == 'px') echo 'selected="selected"'; ?>>Px</option>
+								<option value="%" <?php if ($option[map_height][units] == '%') echo 'selected="selected"'; ?>>%</option>
+							</select>
+							&nbsp;&nbsp;&#124;&nbsp;&nbsp;
+							<?php echo _e('Map Type:','wppl'); ?>
+							<?php echo 				
+							'<select name="wppl_shortcode[' .$e_id .'][map_type]">
+								<option value="ROADMAP" '; echo ($option['map_type'] == "ROADMAP" ) ?'selected="selected"' : ""; echo '>ROADMAP</option>
+								<option value="SATELLITE" '; echo ($option['map_type'] == "SATELLITE" ) ?'selected="selected"' : ""; echo '>SATELLITE</option>
+								<option value="HYBRID" '; echo ($option['map_type'] == "HYBRID" ) ?'selected="selected"' : ""; echo '>HYBRID</option>
+								<option value="TERRAIN" '; echo ($option['map_type'] == "TERRAIN" ) ?'selected="selected"' : ""; echo '>TERRAIN</option>
+							</select>'
+							?>
+							&nbsp;&nbsp;&#124;&nbsp;&nbsp;
+							<input type="checkbox" value="1" name="<?php echo 'wppl_shortcode[' .$e_id .'][auto_zoom]'; ?>" <?php echo (isset($option['auto_zoom'])) ? "checked=checked" : ""; ?>>
+							<?php echo _e('Auto zoom:','wppl'); ?>&nbsp;
+							&nbsp;&nbsp;&#124;&nbsp;&nbsp;
+							<?php echo _e('Or zoom lever:','wppl'); ?>&nbsp; 
+							<select name="<?php echo 'wppl_shortcode[' .$e_id .'][zoom_level]'; ?>">
+							<?php for ($r=1; $r< 18 ; $r++) { 			
+								echo '<option value="' .$r. '"'; echo ($option['zoom_level'] == $r ) ? 'selected="selected"' : ""; echo '>'.$r.'</option>';
+								} ?>						
+							</select><?php echo _e('(will not count if auto zoom is checked)','wppl'); ?></p>
 						</td>
 					</tr>
-			
-					<?php if ($wppl_on['friends']) { ?>
-					<tr style="height:40px;" class="friends-yes">
+							
+					<?php if ($wppl_on['groups']) { ?>
+					<tr style="height:40px;" class="post-types-not groups-yes friends-no">
 						<td>
 						<div class="wppl-settings">
 							<p>
 								<span>
-									<label for="label-per-post-icon-<?php echo $e_id; ?>"><?php echo _e('Per member map&#39;s icon:', 'wppl'); ?></label>
+									<label for="label-per-post-icon-<?php echo $e_id; ?>"><?php echo _e('Per group map&#39;s icon:', 'wppl'); ?></label>
 									<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
 									<span class="wppl-premium-message"></span>
+									<?php echo (!$wppl_options['per_group_icon']) ? '<span class="wppl-turnon-message">(Check the "Allow groups admin to choose map icon" in the main settings page in order to use this feature.)</span>' : ''; ?>
 								</span>
 								<div class="clear"></div>
 								<span class="wppl-help-message">
-									<?php _e('Check this checkbox if you want each member to use its own google map icon. ', 'wppl'); ?>
+									<?php _e('Check this checkbox if you want each group to use its own google map icon. ', 'wppl'); ?>
 								</span>
 							</p>
 						</div>
 						</td>
 						<td class="wppl-premium-version-only">
 							<p>
-								<input type="checkbox" name="<?php echo 'wppl_shortcode[' .$e_id .'][per_member_icon]'; ?>" <?php echo ( isset($option['per_member_icon']) ) ? " checked=checked " : ""; echo ' value="1" '; echo(!$wppl_on['friends']) ? "disabled" : ""; ?>>
+								<input type="checkbox" name="<?php echo 'wppl_shortcode[' .$e_id .'][per_group_icon]'; ?>" <?php echo ( isset($option['per_group_icon']) ) ? " checked=checked " : ""; echo ' value="1" '; echo((!$wppl_on['groups']) ||  (!$wppl_options['per_group_icon']) ) ? "disabled" : ""; ?>>
 								<?php echo _e('Yes','wppl'); ?>
 							</p>
 						</td>
 					</tr>
 					<?php } ?>
 					
-					<tr style=" height:40px;" >
+					<?php do_action('wppl_sf_shortcodes_after_map' , $wppl_on, $wppl_options, $option, $e_id); ?>
+					
+					<tr style=" height:40px;" class="grand-map-not">
 						<td>
 						<div class="wppl-settings">
 							<p>
@@ -484,111 +494,7 @@
 						</td>
 					</tr>
 				
-					<tr style=" height:40px;" class="friends-not">
-						<td>
-						<div class="wppl-settings">
-							<p>
-								<span>
-									<label for="label-posts-scroller-<?php echo $e_id; ?>"><?php echo _e('Random Featured posts :','wppl'); ?></label>
-									<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
-									<span class="wppl-premium-message"></span>
-								</span>
-								<div class="clear"></div>
-								<span class="wppl-help-message">
-									<?php _e('will display number of random featured posts below the map and above the list of results. This way you can mark certain posts as "featured posts" in the admin section and those posts would always be displayed on top. The width of each post would be resized based on the number of posts you choose to display so choose the number of posts based on the width of your content area.  ', 'wppl'); ?>
-								</span>
-							</p>
-						</div>
-						</td>
-						<td class="wppl-premium-version-only">
-							<p>
-							<input type="checkbox" name="<?php echo 'wppl_shortcode[' .$e_id .'][random_featured_posts]'; ?>" <?php echo (isset($option['random_featured_posts'])) ? "checked=checked" : ""; echo ' value="1" '; echo( !$wppl_on['featured_posts']) ? "disabled" : "";?>>
-							<?php echo _e('Show','wppl'); ?>
-							&nbsp;&nbsp;&#124;&nbsp;&nbsp;
-							<?php echo _e('width:','wppl'); ?>
-							&nbsp;<input type="text" onkeyup="this.value=this.value.replace(/[^\d]/,'')" size="1" name="<?php echo 'wppl_shortcode[' .$e_id .'][random_featured_width]'; ?>" <?php echo ($option['random_featured_width']) ? 'value="' . $option['random_featured_width'] . '"' : 'value=""'; echo( !$wppl_on['featured_posts'] ) ? "disabled" : "";?>>px
-							&nbsp;&nbsp;&#124;&nbsp;&nbsp;
-							<?php echo _e('Number of posts:','wppl'); ?>
-							&nbsp;<input type="text" size="1" onkeyup="this.value=this.value.replace(/[^\d]/,'')" name="<?php echo 'wppl_shortcode[' .$e_id .'][random_featured_count]'; ?>" <?php echo ($option['random_featured_count']) ? 'value="' . $option['random_featured_count'] . '"' : 'value="3"'; echo( !$wppl_on['featured_posts'] ) ? "disabled" : "";?>>
-							</p>
-						</td>
-					</tr>
-			
-					<tr style=" height:40px;" class="friends-not">
-						<td>
-						<div class="wppl-settings">
-							<p>
-								<span>
-									<label for="label-show-thumb-<?php echo $e_id; ?>"><?php echo _e('Mark featured posts:','wppl'); ?></label>
-									<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
-									<span class="wppl-premium-message"></span>
-								</span>
-								<div class="clear"></div>
-								<span class="wppl-help-message">
-									<?php _e('Use this feature to mark featured post within the results list. It will display the image that you choose from the dropdown list on top of each featured post. ', 'wppl'); ?>
-								</span>
-							</p>
-						</div>
-						</td>
-						<td class="wppl-premium-version-only">
-							<p style="float:left;width:500px;">
-								<span style="float:left">
-									<input type="checkbox" name="<?php echo 'wppl_shortcode[' .$e_id .'][featured_posts]'; ?>" <?php echo (isset($option['featured_posts'])) ? "checked=checked" : ""; echo ' value="1" '; echo( !$wppl_on['featured_posts'] ) ? "disabled" : ""; ?>>
-									<?php echo _e('Yes','wppl'); ?>
-									&nbsp;&nbsp;&#124;&nbsp;&nbsp;
-									<?php echo _e('Image:','wppl'); ?> 
-								</span>	
-								<span style="float:left;">
-									<?php $map_icons = glob(plugin_dir_path(dirname(__FILE__)) . 'plugins/featured-posts/images/*.png');
-									$display_icon = plugins_url('/geo-my-wp/plugins/featured-posts/images/');
-									foreach ($map_icons as $map_icon) {
-										echo '<span style="float:left;"><input type="radio" name="wppl_shortcode[' .$e_id .'][featured_posts_image]" value="'.basename($map_icon).'"'; echo ($option['featured_posts_image'] == basename($map_icon) ) ? "checked" : ""; echo ' />
-										<img src="'.$display_icon.basename($map_icon).'" height="40px" width="35px"/></span>';
-									} ?>
-								</span>
-							</p>	
-						</td>
-					</tr>
-		
-					<tr style=" height:40px;" class="friends-not">
-						<td>
-						<div class="wppl-settings">
-							<p>
-								<span>
-									<label for="label-show-thumb-<?php echo $e_id; ?>"><?php echo _e('Per result google map:','wppl'); ?></label>
-									<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
-									<span class="wppl-premium-message"></span>
-								</span>
-								<div class="clear"></div>
-								<span class="wppl-help-message">
-									<?php _e('This featured let you add a single map to each result in the results page with marker shows the location and marker shows the user location. This could be used instead or in addition to the main map. ', 'wppl'); ?>
-								</span>
-							</p>
-						</div>
-						</td>
-						<td class="wppl-premium-version-only">
-							<p>
-							<input type="checkbox" value="1" name="<?php echo 'wppl_shortcode[' .$e_id .'][single_map]'; ?>" <?php echo (isset($option['single_map'])) ? "checked=checked" : ""; ?>>
-							<?php echo _e('Yes','wppl'); ?>
-							&nbsp;&nbsp;&#124;&nbsp;&nbsp;
-							<?php echo _e('Height:','wppl'); ?>
-							&nbsp;<input type="text" onkeyup="this.value=this.value.replace(/[^\d]/,'')" name="<?php echo 'wppl_shortcode[' .$e_id .'][single_map_height]'; ?>" value="<?php echo $option['single_map_height']; ?>" size="2">px
-							&nbsp;&nbsp;&#124;&nbsp;&nbsp;
-							<?php echo _e('Width:','wppl'); ?>
-							&nbsp;<input type="text" onkeyup="this.value=this.value.replace(/[^\d]/,'')" name="<?php echo 'wppl_shortcode[' .$e_id .'][single_map_width]'; ?>" value="<?php echo $option['single_map_width']; ?>" size="2">px
-							&nbsp;&nbsp;&#124;&nbsp;&nbsp;
-							<?php echo _e('Map Type:','wppl'); ?>&nbsp;				
-							<select name="<?php echo 'wppl_shortcode[' .$e_id .'][single_map_type]'; ?>">
-								<option value="ROADMAP" <?php echo ($option['single_map_type'] == "ROADMAP" ) ?'selected="selected"' : ""; ?>>ROADMAP</option>
-								<option value="SATELLITE" <?php echo ($option['single_map_type'] == "SATELLITE" ) ?'selected="selected"' : ""; ?>>SATELLITE</option>
-								<option value="HYBRID" <?php echo ($option['single_map_type'] == "HYBRID" ) ?'selected="selected"' : ""; ?>>HYBRID</option>
-								<option value="TERRAIN" <?php echo ($option['single_map_type'] == "TERRAIN" ) ?'selected="selected"' : ""; ?>>TERRAIN</option>
-							</select>
-							</p>
-						</td>
-					</tr>
-			
-					<tr style=" height:40px;" class="friends-not">
+					<tr style=" height:40px;" class="post-types-yes groups-not friends-not">
 						<td>
 						<div class="wppl-settings">
 							<p>
@@ -617,7 +523,7 @@
 						</td>
 					</tr>
 					
-					<tr style=" height:40px;" class="friends-yes">
+					<tr style=" height:40px;" class="post-types-not groups-no friends-yes">
 						<td>
 						<div class="wppl-settings">
 							<p>
@@ -645,7 +551,62 @@
 							</p>
 						</td>
 					</tr>
-					<tr style=" height:40px;" class="friends-not">
+					<tr style=" height:40px;" class="post-types-not groups-yes friends-not">
+						<td>
+						<div class="wppl-settings">
+							<p>
+								<span>
+									<label for="label-show-thumb-<?php echo $e_id; ?>"><?php echo _e('Avatar:','wppl'); ?></label>
+									<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
+								</span>
+								<div class="clear"></div>
+								<span class="wppl-help-message">
+									<?php _e('Display groups avatar and define its width and height in PX. ', 'wppl'); ?>
+								</span>
+							</p>
+						</div>
+						</td>
+						<td>
+							<p>
+								<input type="checkbox" value="1" name="<?php echo 'wppl_shortcode[' .$e_id .'][show_thumb]'; ?>" <?php echo (isset($option['show_thumb'])) ? "checked=checked" : ""; ?>>
+								<?php echo _e('Yes','wppl'); ?>
+								&nbsp;&nbsp;&#124;&nbsp;&nbsp;
+								<?php echo _e('Height:','wppl'); ?>
+								&nbsp;<input type="text" onkeyup="this.value=this.value.replace(/[^\d]/,'')"  size="2" name="<?php echo 'wppl_shortcode[' .$e_id .'][thumb_height]'; ?>" <?php echo ($option['thumb_height']) ? 'value="' . $option['thumb_height'] . '"' : 'value="200"'; ?>>px
+								&nbsp;&nbsp;&#124;&nbsp;&nbsp;
+								<?php echo _e('Width:','wppl'); ?>
+								&nbsp;<input type="text" onkeyup="this.value=this.value.replace(/[^\d]/,'')"  size="2" name="<?php echo 'wppl_shortcode[' .$e_id .'][thumb_width]'; ?>" <?php echo ($option['thumb_width']) ? 'value="' . $option['thumb_width'] . '"' : 'value="200"'; ?>>px
+							</p>
+						</td>
+					</tr>
+					<tr style=" height:40px;" class="post-types-not groups-yes friends-not">
+						<td>
+						<div class="wppl-settings">
+							<p>
+								<span>
+									<label for="label-profile-fields-<?php echo $e_id; ?>"><?php echo _e('Show Addresss','wppl'); ?></label>
+									<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
+									<span class="wppl-premium-message"></span>
+								</span>
+								<div class="clear"></div>
+								<span class="wppl-help-message">
+									<?php _e('Choose the address fields that you want to display in each of the results.', 'wppl'); ?>
+								</span>
+							</p>
+						</div>
+						</td>
+						<td class="wppl-premium-version-only">
+							<p>
+								<input type="checkbox"  value="street" name="<?php echo 'wppl_shortcode[' .$e_id .'][group_address_fields][]'; ?>" <?php if ($option['group_address_fields']) echo (in_array('street' , ($option['group_address_fields']))) ? "checked=checked" : " "; ?>>Street </br>
+								<input type="checkbox"  value="apt" name="<?php echo 'wppl_shortcode[' .$e_id .'][group_address_fields][]'; ?>" <?php if ($option['group_address_fields']) echo (in_array('apt' , ($option['group_address_fields']))) ? "checked=checked" : " "; ?>>Apt/Suit </br>
+								<input type="checkbox"  value="city" name="<?php echo 'wppl_shortcode[' .$e_id .'][group_address_fields][]'; ?>" <?php if ($option['group_address_fields']) echo (in_array('city' , ($option['group_address_fields']))) ? "checked=checked" : " "; ?>>City </br>
+								<input type="checkbox"  value="state" name="<?php echo 'wppl_shortcode[' .$e_id .'][group_address_fields][]'; ?>" <?php if ($option['group_address_fields']) echo (in_array('state' , ($option['group_address_fields']))) ? "checked=checked" : " "; ?>>State</br>
+								<input type="checkbox"  value="zipcode" name="<?php echo 'wppl_shortcode[' .$e_id .'][group_address_fields][]'; ?>" <?php if ($option['group_address_fields']) echo (in_array('zipcode' , ($option['group_address_fields']))) ? "checked=checked" : " "; ?>>Zipcode</br>
+								<input type="checkbox"  value="country" name="<?php echo 'wppl_shortcode[' .$e_id .'][group_address_fields][]'; ?>" <?php if ($option['group_address_fields']) echo (in_array('country' , ($option['group_address_fields']))) ? "checked=checked" : " "; ?>>Country</br>
+							</p>
+						</td>
+					</tr>
+					<tr style=" height:40px;" class="post-types-yes groups-not friends-not">
 						<td>
 						<div class="wppl-settings">
 							<p>
@@ -670,7 +631,7 @@
 						</td>
 					</tr>
 			
-					<tr style=" height:40px;" class="friends-not">
+					<tr style=" height:40px;" class="post-types-yes groups-not friends-not">
 						<td>
 						<div class="wppl-settings">
 							<p>
@@ -695,7 +656,7 @@
 						</td>
 					</tr>
 					
-					<tr style=" height:40px;" class="friends-not">
+					<tr style=" height:40px;" class="post-types-yes groups-not friends-not">
 						<td>
 						<div class="wppl-settings">
 							<p>
@@ -717,29 +678,7 @@
 							</p>
 						</td>
 					</tr>
-					
-					<tr style=" height:40px;" class="friends-yes">
-						<td>
-						<div class="wppl-settings">
-							<p>
-								<span>
-									<label for="label-profile-fields-<?php echo $e_id; ?>"><?php echo _e('Show Profile fields','wppl'); ?></label>
-									<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
-									<span class="wppl-premium-message"></span>
-								</span>
-								<div class="clear"></div>
-								<span class="wppl-help-message">
-									<?php _e('Choose the profile fields that you want to display in each result.', 'wppl'); ?>
-								</span>
-							</p>
-						</div>
-						</td>
-						<td class="wppl-premium-version-only">
-							<p>
-							<?php if ($wppl_on['friends'])  wppl_bp_admin_profile_fields($e_id, $option, 'results_profile_fields'); ?>	
-							</p>
-						</td>
-					</tr>
+				
 				<!--	
 					<tr style=" height:40px;" class="friends-not">
 						<td>
@@ -753,7 +692,7 @@
 						</td>
 					</tr>
 			-->
-					<tr style=" height:40px;">
+					<tr style=" height:40px;" class="grand-map-not">
 						<td>
 						<div class="wppl-settings">
 							<p>
@@ -833,14 +772,38 @@
 			<?php $yy++;
 			endforeach;		
 			} ?>
-		
-    		<p><input type="button" id="create-new-shortcode" value="<?php echo _e('Create new shortcode'); ?>">
-   			<input type="submit" name="Submit" class="wppl-save-btn" value="<?php echo _e('Save Changes'); ?>" /></p>
+			
+			<li class="wppl-shortcode-info-holder">
+    			<table class="widefat" style="margin-bottom: -2px;">
+    				<th>
+						<div class="wppl-settings">
+							<span>
+								<span><h4><?php echo _e('Create new shortcode','wppl'); ?></h4></span>
+								<span><a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px" style="float:left;" /></a></span>
+							</span>
+							<div class="clear"></div>
+							<span class="wppl-help-message">
+							<p style="font-size: 13px;font-weight: normal;"><?php _e('Create a new shortcode. Click on the button of the shortcode that you want to create, wait for the page to reload then click on "edit" to choose the setting of the shortcode. ', 'wppl'); ?>
+							</p></span>
+						</div>	
+					</th>
+    				<tr>
+    					<td>
+    						<p>	
+    							<?php if ( isset( $wppl_on['post_types'] ) && $wppl_on['post_types'] == 1) { ?><input type="button" class="wppl-edit-btn" id="create-new-post-types-shortcode" value="<?php echo _e('Post Types'); ?>" /><?php } ?>
+    							<?php if ( isset( $wppl_on['friends'] ) && $wppl_on['friends'] == 1) { ?><input type="button" class="wppl-edit-btn" id="create-new-friends-shortcode" value="Buddypress Members" /><?php } ?>
+    							<?php if ( isset( $wppl_on['groups'] ) && $wppl_on['groups'] == 1 ) { ?><input type="button" class="wppl-edit-btn" id="create-new-groups-shortcode" value="Buddypress Groups" /><?php } ?>
+   							</p>
+   						</td>
+   					</tr>
+   				</table>
+   			</li>
     
     		<?php $next_id = (isset($tt)) ? (max($tt) + 1) : "1"; ?>
   			<input type="hidden" name="element-id" value="<?php echo next_id; ?>" />
-		
+  			
  			<div style="display:none;" id="wppl-new-shortcode-fields">
+ 				<input type="hidden" name="<?php echo 'wppl_shortcode['.$next_id.'][form_type]'; ?>" id="form-type" value="" disabled/>
 				<input type="hidden" name="<?php echo 'wppl_shortcode['.$next_id.'][form_id]'; ?>" value="<?php echo $next_id; ?>" disabled/>
 				<input type="hidden" name="<?php echo 'wppl_shortcode['.$next_id.'][address_title]'; ?>" value="Zipcode or full address..." disabled />
 				<input type="hidden" name="<?php echo 'wppl_shortcode['.$next_id.'][display_radius]'; ?>" value="1" disabled />
@@ -850,3 +813,4 @@
 				<input type="hidden" name="<?php echo 'wppl_shortcode['.$next_id.'][your_location_icon]'; ?>" value="blue-dot.png" disabled />
 			</div>
 		</ul>
+		<?php wp_enqueue_script('wppl-admin'); ?>
