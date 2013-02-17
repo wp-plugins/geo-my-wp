@@ -1,9 +1,23 @@
+var formId;
+var searchLocator = 0;
 jQuery(window).load(function(){ 
-	jQuery('.map-loader').fadeOut(1500); 
+	jQuery('.map-loader').fadeOut(1500);
+	if (navigator.geolocation) jQuery('.wppl-locate-me-btn').show();
+	jQuery('.wppl-locate-me-btn').click(function() {
+		searchLocator = 1;
+		formId = this.id;
+		jQuery('#wppl-search-locator-wrapper').find("#wppl-locator-spinner").show('fast');
+		getLocation();
+		
+	});
 });
 
+function showSpinner() {
+	jQuery('.wppl-location-form').find("#wppl-locator-spinner").show('fast');
+}
+
+//// scroll to top of page ////
 jQuery(function() {
-	//// scroll to top of page ////
 	jQuery(window).scroll(function() {
 		if(jQuery(this).scrollTop() != 0) {
 			jQuery('#wppl-go-top').fadeIn();	
@@ -26,97 +40,59 @@ if (getCookie('wppl_city') == undefined) {
 		getLocation();
 	}
 }
-
-
-
-function getLocationNoSubmit() {
-	submitNo = 0;
-	getLocation();
-}
 	
-function foundYouMessage(){
-	jQuery('html').prepend('<div id="wppl-justwait"></div>');
-	var locateMessage=document.getElementById('wppl-justwait');
-	locateMessage.style.display = "";
-	locateMessage.innerHTML = '<div id="wppl-wait-within"><div id="wppl-wait-close"><a href="#" onclick="removeMessage();" style="text-decoration:none;">X</a></div><br /><div id="wppl-wait-message"><p>Just one more moment please. Getting your current location...</p><br /></div></div>';
-}
-
 //// set cookies ////
 function setCookie(name,value,exdays) {
 	var exdate=new Date();
 	exdate.setTime(exdate.getTime() + (exdays*24*60*60*1000));
-	var cooki=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+	var cooki=escape(encodeURIComponent(value)) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
 	document.cookie=name + "=" + cooki + "; path=/";
 }
 
-function getCookie(c_name) {
-	var i,x,y,ARRcookies=document.cookie.split(";");
-	
-	for (i=0;i<ARRcookies.length;i++) {
-  		x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
- 		y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
-  		x=x.replace(/^\s+|\s+$/g,"");
-  		if (x==c_name) {
-    		return unescape(y);
-    	}
-  	}
+function getCookie(cookie_name) {
+    var results = document.cookie.match ('(^|;) ?' + cookie_name + '=([^;]*)(;|$)');
+    return results ? decodeURIComponent(results[2]) : null;
+} 
+
+function deleteCookie(c_name) {
+    document.cookie = encodeURIComponent(c_name) + "=deleted; expires=" + new Date(0).toUTCString();
 }
 
 function removeMessage() {
-	jQuery('div').remove('#wppl-justwait');
-	}
-
-function getLocation() {
-	if (navigator.geolocation) {
-    	navigator.geolocation.getCurrentPosition(showPosition,showError);
-    	if(locateMessage == 1) {
-    		foundYouMessage();
-    	}
+	if (searchLocator == 1) {
+		jQuery('#TB_ajaxContent').find('#wppl-locator-message-wrapper').html('');
+		searchLocator = 0;
+		tb_remove();
 	} else {
-   	 	alert("Geolocation is not supported by this browser.");
-  	}
+		jQuery('#TB_ajaxContent').find('#wppl-locator-message-wrapper').html('');
+    	jQuery('.wppl-location-form #wppl-locator-info').show('fast');
+    }
+}
 
+//// run the user locator and geolocation ////
+function getLocation() {
+	// if GPS exists locate the user //
+	if (navigator.geolocation) {
+    	navigator.geolocation.getCurrentPosition(showPosition,showError);	
+    	if (searchLocator != 1) {
+    		jQuery('.wppl-location-form #wppl-locator-info').hide('fast');
+    		jQuery('#TB_ajaxContent').find('#wppl-locator-message-wrapper').html('<div id="wppl-locator-success-message">Getting your current location...</div>');
+		}
+	} else {
+		// if nothing found we cant do much. we cant locate the user :( //
+		jQuery('#TB_ajaxContent').find('#wppl-locator-message-wrapper').html('<div id="wppl-locator-success-message">we are sorry! Geolocation is not supported by this browser and we cannot locate you.</div>');
+		setTimeout(function() {
+      		setCookie("wppl_denied","denied",1);
+      		removeMessage();
+      	},2500)
+	} // end locator function //
+	
+	// GPS locator function //
 	function showPosition(position) {
   		var geocoder = new google.maps.Geocoder();
   		geocoder.geocode({'latLng': new google.maps.LatLng(position.coords.latitude, position.coords.longitude)}, function (results, status) {
         	if (status == google.maps.GeocoderStatus.OK) {
-          		
-          		if (results[0]) {
-					var address = results[0].address_components;
-					for ( x in address ) {
-          				if(address[x].types == 'locality,political') {
-          					city = address[x].long_name;
-          				}
-          				if (address[x].types == 'administrative_area_level_1,political') {
-          					state = address[x].short_name;
-          				}
-          				if (address[x].types == 'postal_code') {
-          					zipcode = address[x].long_name;
-          				}
-					}
-					cityState = city +", "+state;
-			
-					setCookie("wppl_lat",position.coords.latitude,7);
-					setCookie("wppl_long",position.coords.longitude,7);
-					setCookie("wppl_zipcode",zipcode,7);
-					setCookie("wppl_city",cityState,7);
-					
-					if(locateMessage == 1) {
-						document.getElementById("wppl-wait-message").innerHTML="<p id='wppl-found-you'>We found you at " + cityState + "</p>";
-					}
-					jQuery(".wppl-address").val(cityState);
-				
-					if(submitNo == 0) {
-						setTimeout(function() {
-							window.location.reload();	
-						},1000);
-					} else {
-						setTimeout(function() {
-	 						var btnSubmit = document.getElementById("wppl-submit-"+formId);
-							btnSubmit.click();
-						},1000);
-					}
-				}
+          		getAddressFields(results);
         	} else {
           		alert('Geocoder failed due to: ' + status);
         	}
@@ -126,74 +102,166 @@ function getLocation() {
 	function showError(error) {
 		switch(error.code) {
     		case error.PERMISSION_DENIED:
-      			document.getElementById("wppl-wait-message").innerHTML="<p id='wppl-found-you-not'>User denied the request for Geolocation.</p>"; 		
+      			jQuery('#TB_ajaxContent').find('#wppl-locator-message-wrapper').html('<div id="wppl-locator-not-success-message">User denied the request for Geolocation.</div>');
+      			jQuery('#TB_ajaxContent').find("#wppl-locator-spinner").hide('fast');		
       			setTimeout(function() {
       				setCookie("wppl_denied","denied",1);
       				removeMessage();
-      			},1000)
+      			},2500)
       		break;
     		case error.POSITION_UNAVAILABLE:
-      			document.getElementById("wppl-wait-message").innerHTML="<p id='wppl-found-you-not'>Location information is unavailable.</p>";
+      			jQuery('#TB_ajaxContent').find('#wppl-locator-message-wrapper').html('<div id="wppl-locator-not-success-message">Location information is unavailable</div>');
+      			jQuery('#TB_ajaxContent').find("#wppl-locator-spinner").hide('fast');
       			setTimeout(function() {
       				setCookie("wppl_denied","denied",1);
       				removeMessage();
-      			},1000)
+      			},2500)
       		break;
     		case error.TIMEOUT:
-      			document.getElementById("wppl-wait-message").innerHTML="<p id='wppl-found-you-not'>The request to get user location timed out.</p>";
+      			jQuery('#TB_ajaxContent').find('#wppl-locator-message-wrapper').html('<div id="wppl-locator-not-success-message">The request to get user location timed out</div>');
+      			jQuery('#TB_ajaxContent').find("#wppl-locator-spinner").hide();
       			setTimeout(function() {
       				setCookie("wppl_denied","denied",1);
       				removeMessage();
-      			},1000)
+      			},2500)
       		break;
     			case error.UNKNOWN_ERROR:
-      			document.getElementById("wppl-wait-message").innerHTML="<p id='wppl-found-you-not'>An unknown error occurred.</p>";
+      			jQuery('#TB_ajaxContent').find('#wppl-locator-message-wrapper').html('<div id="wppl-locator-not-success-message">An unknown error occurred</div>');
+      			jQuery('#TB_ajaxContent').find("#wppl-locator-spinner").hide();
       			setTimeout(function() {
       				setCookie("wppl_denied","denied",1);
       				removeMessage();
-      			},1000)
+      			},2500)
       		break;
 		}
 	}
 }
-  
-///// get user current lucation shortcode/widget /////
-jQuery(function() {
-    	jQuery('#location-form-btn').click(function(event){
-    		event.preventDefault();
-    		jQuery("#wppl-show-location-form").slideToggle(); 
-    	}); 
-    });
+
+/* get location in user's location widget when manually typing address */	
+jQuery('.wppl-location-form').submit(function() {
+	showSpinner();
+	var retAddress = jQuery(this).find(".wppl-user-address").val();
 	
-	
-function getUserLocation () {
 	geocoder = new google.maps.Geocoder();
-	var city  	= '';
-	var state 	= '';
-	var zipcode = '';
-	
+	locateMessage = 0;
    	geocoder.geocode( { 'address': retAddress}, function(results, status) {
-      	if (status == google.maps.GeocoderStatus.OK) {
-        	setCookie('wppl_lat',results[0].geometry.location.lat(),7);
-        	setCookie('wppl_long',results[0].geometry.location.lng(),7);
-        	var address = results[0].address_components;
-				for ( x in address ) {
-          			if(address[x].types == 'locality,political') {
-          				city = address[x].long_name + ', ';
-          			}
-          			if (address[x].types == 'administrative_area_level_1,political') {
-          				state = address[x].short_name;
-          			}
-          			if (address[x].types == 'postal_code') {
-          				zipcode = address[x].long_name;
-          				setCookie('wppl_zipcode',zipcode,7);
-          			}
-				}
-				setCookie('wppl_city',city +state,state,7);
-				window.location.reload();
+      	if (status == google.maps.GeocoderStatus.OK) {	
+      		geocoder.geocode({'latLng': new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng())}, function (results, status) {
+        		if (status == google.maps.GeocoderStatus.OK) {
+        			submitNo = 0;
+          			getAddressFields(results);
+        		} else {
+          			alert('Geocoder failed due to: ' + status);
+        		}
+      		});
     	} else {
-        	alert("Geocode was not successful for the following reason: " + status);     
+    		jQuery('.wppl-location-form').find("#wppl-locator-spinner").hide('fast');	
+    		jQuery('.wppl-location-form #wppl-locator-info').hide('fast');
+    		jQuery('#TB_ajaxContent .wppl-location-form #wppl-locator-message-wrapper').html('<div id="wppl-locator-not-success-message">Geocode was not successful for the following reason: ' + status +'</div>');
+      		setTimeout(function() {
+      			setCookie("wppl_denied","denied",1);
+      			removeMessage();
+      		},2500)
     	}
    	}); 
+});
+
+
+/* main function to geocoding from lat/long to address or the other way around when locating the user */
+function getAddressFields(results) {
+	/* remove all cookies - we gonna get new values */
+	deleteCookie('wppl_city');
+	deleteCookie('wppl_state');
+	deleteCookie('wppl_zipcode');
+	deleteCookie('wppl_country');
+	deleteCookie('wppl_lat');
+	deleteCookie('wppl_long');
+
+	var city = '';
+	var state = '';
+	var zipcode = '';
+	var country = '';
+	var cityYes;
+    var stateYes;
+    var zipcodeYes;
+    var countryYes;
+    
+        	
+	var address = results[0].address_components;
+	
+	gotLat = results[0].geometry.location.lat();
+    gotLong = results[0].geometry.location.lng();
+    
+    setCookie("wppl_lat",gotLat,7);
+    setCookie("wppl_long",gotLong,7);
+	
+	/* check for each of the address components and if exist save it in a cookie */
+	for ( x in address ) {
+					
+		if (address[x].types == 'administrative_area_level_1,political') {
+          	state = address[x].short_name;
+          	setCookie("wppl_state",state,7);
+          	stateYes = 1;
+         } 
+         
+         if(address[x].types == 'locality,political') {
+          	city = address[x].long_name;
+          	setCookie("wppl_city",city,7);
+          	cityYes = 1;
+         } 
+         
+         if (address[x].types == 'postal_code') {
+          	zipcode = address[x].long_name;
+          	setCookie("wppl_zipcode",zipcode,7);
+          	zipcodeYes = 1;
+        } 
+        
+        if (address[x].types == 'country,political') {
+          	country = address[x].long_name;
+          	setCookie("wppl_country",country,7);
+          	countryYes = 1;
+         } 
+	}
+	
+	/* if component is not exists clear the cookie */
+	if(cityYes != 1) {setCookie("wppl_city",'',7);}
+	if(stateYes != 1) {setCookie("wppl_state",'',7);}
+	if(zipcodeYes != 1) {setCookie("wppl_zipcode",'',7);}
+	if(countryYes != 1) {setCookie("wppl_country",'',7);}
+	
+	/* check for city and state and if not city and country to display in the message */
+	if (cityYes == 1) {
+		cityState = city;
+		if (stateYes == 1) {
+			cityState = city + ', ' + state;
+		} else if (countryYes == 1) {
+			cityState = city + ', ' + country;
+		}
+			
+	} else {
+		if (stateYes == 1) {
+			cityState = state;
+		} else if (countryYes == 1) {
+			cityState = country;
+		}	
+	}
+		
+	/* display found you message */		
+	jQuery(".wppl-address").val(cityState);
+			
+	if(searchLocator == 0) {
+		jQuery('.wppl-location-form #wppl-locator-info').hide('fast');
+		jQuery('#TB_ajaxContent').find('#wppl-locator-message-wrapper').html('<div id="wppl-locator-success-message">We found you at ' + cityState + '</div>');
+		setTimeout(function() {
+			window.location.reload();	
+		},1000);
+	} else {
+		jQuery('#TB_ajaxContent').find('#wppl-locator-message-wrapper').html('<div id="wppl-locator-success-message">We found you at ' + cityState + '</div>');
+		setTimeout(function() {
+	 		var btnSubmit = jQuery('#'+formId).closest('form').find('.wppl-search-submit');
+			btnSubmit.click();
+		},1000);
+	} 
 }
   
+	
