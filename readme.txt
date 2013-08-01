@@ -1,10 +1,11 @@
 === GEO my Wordpress ===
 Contributors: Ninjew
 Donate link: http://geomywp.com/
-Tags: zipcode,radius,search,posts,address,distance,google,map,directions,locations
-Requires at least: 3.1
-Tested up to: 3.5.1
-Stable tag: 1.7.2
+Tags: proximity search, zipcode search, radius search, posts, address, distance, google, Google maps, directions, locations, store locator, Geolocate, GEO, 
+Requires at least: 3.0
+Tested up to: 3.5.2
+Buddypress: 1.8
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,13 +13,9 @@ Using Google's API tools GEO my WP provides an advance proximity search for any 
 
 == Description ==
 
-GEO my WP is the continuous version of the plugin WordPress Places Locator. Now , with the integration of Buddypress the plugin is no longer search for places only but also for members.
+GEO my WP is the complete GEO solution for your wordpress project. 
 Using google API tool GEO my WP let you add location to any of your post types, pages or Buddypress members. After adding your locations you can create an advance search form including radius values, units (miles and kilometers) and custom taxonomies for post types or profile fields for Buddypress. Results will be displayed based on the address entered and the chosen radius ordered by the distance.
 Together with other great features like auto locating user's current location, displaying driving distance, "get directions" link, google map with markers of the location and much more, GEO my WP just might be the coolest GEO tool for WordPress.
-
-to see the post type part in action go <a href="http://geomywp.com/search-estate/" target="_blank">here</a> or <a href="http://geomywp.com/search-restaurants/" target="_blank">here</a> and enter 33063 in the address field
-to see the Buddypress part in action go <a href="http://geomywp.com/search-members/" target="_blank">here</a> and enter 33063 in the address field
-
 
 The great features of GEO my WP:
 
@@ -100,29 +97,65 @@ Widgets:
 
 == Installation ==
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. In admin 'Settings' go to 'Places Locator'.
-4. Choose the post types where you want the address fields to appear. Only posts with valid address will be added to the database.
-5. Build a search form using the shortcode builder.
-6. Copy and paste the shortcode into any page.
+Automatic Plugin Installation. To add a WordPress Plugin using the built-in plugin installer:
+1. Go to Plugins > Add New.
+2. Under Search, type "GEO my WP".
+3. GEO my WP should show up on top of the results.
+4. Click "Install"  to install GEO my WP.
+5. A pop-up window will ask you to confirm your wish to install the Plugin.
+6. Click Proceed to continue with the installation. The resulting installation screen will list the installation as successful or note any problems during the install.
+7. If successful, click Activate Plugin to activate it.
+
+Manual Plugin Installation. To install a WordPress Plugin manually:
+1. Download GEO my WP Plugin to your desktop.
+2. The plugin will downloaded as a zip. extract the Plugin folder to your desktop.
+3. With your FTP program, upload the Plugin folder to the wp-content/plugins folder in your WordPress directory online.
+4. Go to Plugins screen and find the newly uploaded Plugin in the list.
+5. Click Activate Plugin to activate it.
+
+for detailed installation and setup guied click <a href="http://geomywp.com" >here</a>
 
 == Frequently Asked Questions ==
 
-1. for any questions, error report and suggestions please email info@geomywp.com or visit http://www.geomywp.com
+1. For questions, bugs report and suggestions please visit <a href="http://geomywp.com">www.geomywp.com</a>
+
+== Screenshots ==
+
+1. For screenshots please visit http://www.geomywp.com
 
 == Changelog ==
 
-== 1.7.2 ==
-* PLease Note: in the shortcode search form page (admin) the taxonomies setting had been modified and so you might have to save the taxonomies settings again.
-* Compatible with Wordpress 3.5.1
-* bug Fix - "Get Directions" link on single post map.
-* Show N/A for additional fields (when empty) in single post map.
-* Fix bug where deleted posts not being deleted from wp_places_locator table in database.
-* Buddypress Location slug changed from "wppl-location" to "My-location".
-* Other minor frontend and backend bug fixes.
+== 2.0 ==
+
+This is a major update with many bug fixs, core modification and improvements, new features and more. Please make sure to backup your current version before updating to the new one. 
+After updating you will need to go over the settings page and re-save your settings as well as the search forms as many things have changed.
+
+<strong>Please vistin <a href="http://geomywp.com">www.geomywp.com</a> for more information before updating your plugin</strong>
+Below are some of the major changes in this version:
+
+* Core modification - The code reduced drastically, It is much cleaner, performs better, many function are documented, the number of files and folders had been reduced and more organized.
+* Admin - styling improved, better search forms page, tooltips and more...
+* Search queries - The main search queries are now working directly with WordPress query (WP_query) and BuddyPress query ( BP_User_Query) which should be better for performance and will be much easier to modify the plugin to work with every theme. Now you can simply copy and paste the WordPress posts loop from the theme that you are using into the result.php page of the plugin in order to have the results page matching you theme.
+* Stand alone search form -  the search form moved into its own template file, just like the results theme. Now you can have full control on the look and functionality of the search form and the results.
+* Improved widgets and shortcodes.
+* Warnings removed.
+* New, improved pagination - new buttons, new look and fix the issue where it shows infinite pagination buttons when having many results.
+* Per page value - using a drop down box you ( or the users of your site ) can now change the "per page" value live when viewing the results .
+* There is no more use for the "form_only" attribute when using gmw shortcode. In order to have the results showing in a different page you will have to select the results page in the shortcode setting.
+* localization - GEO my WP is now ready to be translated. There are no translated files ready yet but a default PO file is in geo-my-wp/languages. the plugin is also ready to be used with right to left languages. Please, if any of you get to translate GEO my WP it will be much appreciated if you'll share the PO and mo files so others will be able to use it as well.
+* There is no more use for the shortcode [gmw_friends_results]. [gmw_results] will now serve as a results page for both posts and BuddyPress members.
+* Styling - I have modified and  removed most of the CSS styling from the plugin. So if you had any custom styling you will probably lose it and will have to adapt it again.
+* Renamed Files and folders
+* Shortcodes name changed from "wppl" to "gmw":
+  	* main shortcode - [gmw]
+	* results - [gmw_results]
+	* current location - [gmw_current_location]
+	* single location - [gmw_single_location]
+	* single member - [gmw_member_location]
+* ettings in the "search form shortcodes" and other shortcodes changed as well. Now you can set the "Width" and "Height" of the maps to either pixels or percentage. in the "search form shortcodes" settings  and in the "single location" and "single member" shortcodes. for example: [gmw_single_location width="100%" height="200px"] .
 
 == 1.7 ==
+
 * This is a major update - most of the core code has improved for better performance, security issues and many bug fix.
 * Works with Wordpress 3.5. 
 * SQL queries are now more secure and were modified for better performance.
@@ -237,7 +270,6 @@ Widgets:
 * Admin page improvments
 * Shortcode to display map of a single location on single page template
 
-
 = 1.1 =
 * Bug fix.
 * Map types added :ROADMAP,SATELLITE,HYBRID and TERRAIN.
@@ -252,9 +284,7 @@ Widgets:
 = 1.2.5 =
 * Plugin improvments
 
-== Screenshots ==
 
-1. For screenshots please visit http://www.wpplaceslocator.com/screenshots
 
 
 
