@@ -1,0 +1,24 @@
+/**
+ * Default search form stylesheet.
+ * @version 1.0
+ * @author Eyal Fitoussi
+ */
+ 
+/* Search Form */
+
+.gmw-locate-me-btn img {
+	height: 22px;
+	width: 22px;
+}
+
+.gmw-single-address-field {
+	float:left;
+}
+
+.gmw-checkbox-taxonomy-wrapper label {
+	display:block;
+}
+
+.gmw-checkbox-taxonomy-wrapper span.label {
+	font-weight:bold;
+}
