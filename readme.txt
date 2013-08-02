@@ -5,11 +5,12 @@ Tags: proximity search, zipcode search, radius search, posts, address, distance,
 Requires at least: 3.0
 Tested up to: 3.5.2
 Buddypress: 1.8
-Stable tag: 2.0
+Stable tag: 2.01
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Using Google's API tools GEO my WP provides an advance proximity search for any post type or buddypress's members based on a given address and radius.
+
 
 == Description ==
 
@@ -98,32 +99,36 @@ Widgets:
 == Installation ==
 
 Automatic Plugin Installation. To add a WordPress Plugin using the built-in plugin installer:
-1. Go to Plugins > Add New.
-2. Under Search, type "GEO my WP".
-3. GEO my WP should show up on top of the results.
-4. Click "Install"  to install GEO my WP.
-5. A pop-up window will ask you to confirm your wish to install the Plugin.
-6. Click Proceed to continue with the installation. The resulting installation screen will list the installation as successful or note any problems during the install.
-7. If successful, click Activate Plugin to activate it.
+* Go to Plugins > Add New.
+* Under Search, type "GEO my WP".
+* GEO my WP should show up on top of the results.
+* Click "Install"  to install GEO my WP.
+* A pop-up window will ask you to confirm your wish to install the Plugin.
+* Click Proceed to continue with the installation. The resulting installation screen will list the installation as successful or note any problems during the install.
+* If successful, click Activate Plugin to activate it.
 
 Manual Plugin Installation. To install a WordPress Plugin manually:
-1. Download GEO my WP Plugin to your desktop.
-2. The plugin will downloaded as a zip. extract the Plugin folder to your desktop.
-3. With your FTP program, upload the Plugin folder to the wp-content/plugins folder in your WordPress directory online.
-4. Go to Plugins screen and find the newly uploaded Plugin in the list.
-5. Click Activate Plugin to activate it.
+* Download GEO my WP Plugin to your desktop.
+* The plugin will downloaded as a zip. extract the Plugin folder to your desktop.
+* With your FTP program, upload the Plugin folder to the wp-content/plugins folder in your WordPress directory online.
+* Go to Plugins screen and find the newly uploaded Plugin in the list.
+* Click Activate Plugin to activate it.
 
 for detailed installation and setup guied click <a href="http://geomywp.com" >here</a>
 
 == Frequently Asked Questions ==
 
-1. For questions, bugs report and suggestions please visit <a href="http://geomywp.com">www.geomywp.com</a>
+For questions, bugs report and suggestions please visit <a href="http://geomywp.com">www.geomywp.com</a>
 
 == Screenshots ==
 
 1. For screenshots please visit http://www.geomywp.com
 
 == Changelog ==
+
+== 2.01 ==
+
+* Minor fix - Add-ons Updater System
 
 == 2.0 ==
 
@@ -280,11 +285,5 @@ Below are some of the major changes in this version:
 
 
 == Upgrade Notice ==
-
-= 1.2.5 =
-* Plugin improvments
-
-
-
 
 
