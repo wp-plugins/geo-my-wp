@@ -5,7 +5,7 @@ Tags: proximity search, zipcode search, radius search, posts, address, distance,
 Requires at least: 3.0
 Tested up to: 3.5.2
 Buddypress: 1.8
-Stable tag: 2.01
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -125,6 +125,13 @@ For questions, bugs report and suggestions please visit <a href="http://geomywp.
 1. For screenshots please visit http://www.geomywp.com
 
 == Changelog ==
+
+== 2.1 ==
+
+* Fix : Removed textarea type xprofile field when choosing the profile fields in the search form
+* Fix : Removed special characters from xprofile fields name in the search forms which caused issues with urls
+* Fix : Add member count for buddypress results page
+* map-icon folder was removed
 
 == 2.01 ==
 
