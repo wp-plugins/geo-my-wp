@@ -118,11 +118,11 @@ for detailed installation and setup guied click <a href="http://geomywp.com" >he
 
 == Frequently Asked Questions ==
 
-For questions, bugs report and suggestions please visit <a href="http://geomywp.com">www.geomywp.com</a>
+For questions, bugs report and suggestions please visit <a href="http://geomywp.com">www.geomywp.com</a>.
 
 == Screenshots ==
 
-1. For screenshots please visit http://www.geomywp.com
+1. For screenshots please visit http://www.geomywp.com.
 
 == Changelog ==
 
@@ -131,7 +131,7 @@ For questions, bugs report and suggestions please visit <a href="http://geomywp.
 * Fix : Removed textarea type xprofile field when choosing the profile fields in the search form
 * Fix : Removed special characters from xprofile fields name in the search forms which caused issues with urls
 * Fix : Add member count for buddypress results page
-* map-icon folder was removed
+* map-icon folder was removed.
 
 == 2.01 ==
 
