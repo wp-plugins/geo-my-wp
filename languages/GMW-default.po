@@ -1,0 +1,1185 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: GMW 2.0\n"
+"POT-Creation-Date: 2013-08-03 19:12-0500\n"
+"PO-Revision-Date: 2013-08-03 19:12-0500\n"
+"Last-Translator: Eyal Fitoussi <info@geomywp.com>\n"
+"Language-Team: Eyal Fitoussi <info@geomywp.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: /Users/fitoussi_eyal/local sites/site-1/wp-content/"
+"plugins/geo-my-wp\n"
+"X-Poedit-SearchPath-0: admin\n"
+"X-Poedit-SearchPath-1: includes\n"
+"X-Poedit-SearchPath-2: plugins/posts/admin\n"
+"X-Poedit-SearchPath-3: plugins/posts/includes\n"
+"X-Poedit-SearchPath-4: plugins/friends/includes\n"
+"X-Poedit-SearchPath-5: plugins/friends/templates\n"
+
+#: admin/admin-addons.php:10 admin/admin-settings.php:5
+msgid "Add-ons"
+msgstr ""
+
+#: admin/admin-addons.php:14
+msgid ""
+"The add-ons will add extra features to GEO my WP. You can choose to activate/"
+"deactivate any of them. \n"
+"\t\t\t\t\t\t\t\tActivate only the add-ons that you are going to use to have "
+"better performance. You need to check the checkboxes for the add-ons you "
+"wish to use\n"
+"\t\t\t\t\t\t\t\tand click on \"Save Changes\". If exists, the settings for "
+"those add-ons will show up in the \"Settings\" page."
+msgstr ""
+
+#: admin/admin-addons.php:50
+msgid "Post types themes"
+msgstr ""
+
+#: admin/admin-addons.php:54
+msgid ""
+"Here you can see all the standard and custom search from and search results "
+"templates file that you can use with the shortcodes you are creating. "
+"Standard termplate files are those that comes with the plugin and custom "
+"template files \n"
+"\t\t\t\t\t\t\t\t\t\tare those that you can create and upload to your theme "
+"or child theme folder. This way you can be sure that any changes you are "
+"making to the files are not going to be remove when updating the plugin.\n"
+"\t\t\t\t\t\t\t\t\t\tThe standard search forms template files located at "
+"<code><strong>geo-my-wp/plugins/posts/search-from/.</strong></code> and the "
+"search results template files at <code><strong>geo-my-wp/plugins/posts/"
+"search-results/</strong></code>. \n"
+"\t\t\t\t\t\t\t\t\t\tIn order To use your custom template files you will need "
+"to upload (you will need create the necessary folders first) the search form "
+"template fiels to \n"
+"\t\t\t\t\t\t\t\t\t\t<code><strong>themes/your theme or child theme folder/"
+"geo-my-wp/posts/search-from/.</strong></code> and the search results "
+"template files to <code><strong>themes/your theme or child theme folder/geo-"
+"my-wp/posts/search-results/.</strong></code>"
+msgstr ""
+
+#: admin/admin-addons.php:69 admin/admin-addons.php:160
+msgid "Search forms template files"
+msgstr ""
+
+#: admin/admin-addons.php:85 admin/admin-addons.php:114
+#: admin/admin-addons.php:177 admin/admin-addons.php:205
+msgid "Custom"
+msgstr ""
+
+#: admin/admin-addons.php:97 admin/admin-addons.php:189
+msgid "Search results template files"
+msgstr ""
+
+#: admin/admin-addons.php:141
+msgid "Friends locator (Buddypress) themes"
+msgstr ""
+
+#: admin/admin-addons.php:145
+msgid ""
+"Here you can see all the standard and custom search from and search results "
+"templates file that you can use with the shortcodes you are creating for "
+"buddypress members. Standard termplate files are those that comes with the "
+"plugin and custom template files \n"
+"\t\t\t\t\t\t\t\t\t\tare those that you can create and upload to your theme "
+"or child theme folder. This way you can be sure that any changes you are "
+"making to the files are not going to be remove when updating the plugin.\n"
+"\t\t\t\t\t\t\t\t\t\tThe standard search forms template files located at "
+"<code><strong>geo-my-wp/plugins/friends/search-from/.</strong></code> and "
+"the search results template files at <code><strong>geo-my-wp/plugins/friends/"
+"search-results/</strong></code>. \n"
+"\t\t\t\t\t\t\t\t\t\tIn order To use your custom template files you will need "
+"to upload (you will need create the necessary folders first) the search form "
+"template fiels to \n"
+"\t\t\t\t\t\t\t\t\t\t<code><strong>themes/your theme or child theme folder/"
+"geo-my-wp/friends/search-from/.</strong></code> and the search results "
+"template files to <code><strong>themes/your theme or child theme folder/geo-"
+"my-wp/friends/search-results/.</strong></code>"
+msgstr ""
+
+#: admin/admin-settings.php:6
+msgid "Settings"
+msgstr ""
+
+#: admin/admin-settings.php:7
+msgid "Search forms"
+msgstr ""
+
+#: admin/admin-settings.php:62 admin/admin-settings.php:106
+msgid "GEO my Wp - Main Settings"
+msgstr ""
+
+#: admin/admin-settings.php:83 admin/admin-settings.php:116
+#: admin/admin-settings.php:147 admin/admin-settings.php:190
+msgid "Developed by Eyal Fitoussi"
+msgstr ""
+
+#: admin/admin-settings.php:132
+msgid "GEO my WP - Add-ons"
+msgstr ""
+
+#: admin/admin-settings.php:180
+msgid "Search Form - Shortcodes"
+msgstr ""
+
+#: admin/admin-shortcodes.php:54
+msgid "Create new Search form"
+msgstr ""
+
+#: admin/admin-shortcodes.php:57 plugins/posts/admin/admin-addons.php:6
+msgid "Post Types"
+msgstr ""
+
+#: admin/admin-shortcodes.php:60
+msgid "Buddypress Members"
+msgstr ""
+
+#: admin/admin-shortcodes.php:63
+msgid "Buddypress Groups"
+msgstr ""
+
+#: admin/admin-shortcodes.php:76 admin/admin-shortcodes.php:134
+#: plugins/posts/admin/edit-shortcode.php:140
+#: plugins/friends/includes/admin/edit-shortcode.php:96
+msgid "ID"
+msgstr ""
+
+#: admin/admin-shortcodes.php:77 admin/admin-shortcodes.php:135
+#: plugins/posts/admin/edit-shortcode.php:142
+#: plugins/friends/includes/admin/edit-shortcode.php:98
+msgid "Shortcode"
+msgstr ""
+
+#: admin/admin-shortcodes.php:78 admin/admin-shortcodes.php:136
+#: admin/gmw-premium-updater.php:163
+#: plugins/posts/admin/edit-shortcode.php:143
+#: plugins/friends/includes/admin/edit-shortcode.php:99
+msgid "Action"
+msgstr ""
+
+#: admin/admin-shortcodes.php:79 admin/admin-shortcodes.php:137
+#: plugins/posts/admin/edit-shortcode.php:141
+#: plugins/friends/includes/admin/edit-shortcode.php:97
+msgid "Type"
+msgstr ""
+
+#: admin/admin-shortcodes.php:107
+msgid "Edit"
+msgstr ""
+
+#: admin/admin-shortcodes.php:110
+msgid "Duplicate"
+msgstr ""
+
+#: admin/admin-shortcodes.php:113 plugins/posts/admin/edit-shortcode.php:168
+#: plugins/friends/includes/admin/edit-shortcode.php:119
+msgid "Delete"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:153
+msgid "GEO my WP Licenses"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:161
+msgid "Add-On"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:162
+msgid "License Key"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:164
+msgid "Status"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:179
+msgid "Enter your license key"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:187
+msgid "Deactivate"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:190
+msgid "active"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:195 admin/gmw-premium-updater.php:206
+#: admin/main-settings.php:135 plugins/posts/admin/admin-settings.php:98
+#: plugins/posts/admin/edit-shortcode.php:304
+#: plugins/posts/admin/edit-shortcode.php:608
+#: plugins/posts/admin/edit-shortcode.php:681
+#: plugins/friends/includes/admin/admin-settings.php:18
+#: plugins/friends/includes/admin/edit-shortcode.php:251
+#: plugins/friends/includes/admin/edit-shortcode.php:479
+#: plugins/friends/includes/admin/edit-shortcode.php:552
+msgid "Save Changes"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:197
+msgid "Activate"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:201 admin/gmw-premium-updater.php:209
+msgid "inactive"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:217
+msgid "Reset all license keys"
+msgstr ""
+
+#: admin/gmw-premium-updater.php:220
+msgid "Reset"
+msgstr ""
+
+#: admin/main-settings.php:7
+msgid "General Settings"
+msgstr ""
+
+#: admin/main-settings.php:20
+msgid "Google Maps API V3 Key"
+msgstr ""
+
+#: admin/main-settings.php:24
+msgid ""
+"This is optional but will let you track your API requests. you can obtain "
+"your free Goole API key <a href=\"https://code.google.com/apis/console/\" "
+"target=\"_blank\">here</a>."
+msgstr ""
+
+#: admin/main-settings.php:40
+msgid "Bing maps API"
+msgstr ""
+
+#: admin/main-settings.php:44
+msgid ""
+"Use this feature if you often get \"OVER_QUERY_LIMIT\" response from google "
+"when using the search form. \n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\tOVER_QUERY_LIMIT happens when there are too many "
+"calls to Google API from the same IP at a very short time or when the per "
+"day limit had been used. \n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\tThis will prevent the address entered in the "
+"search form from being geocoded and so no results will return.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\tYou can read about Bing services and obtain your "
+"key <a href=\"http://www.bingmapsportal.com/application/\" target=\"_blank"
+"\">Here</a>"
+msgstr ""
+
+#: admin/main-settings.php:65
+msgid "Country code"
+msgstr ""
+
+#: admin/main-settings.php:69
+msgid ""
+"Enter you country code. For example for United States enter US. you can find "
+"your country code <a href=\"http://www.wpplaceslocator.com/wp-content/"
+"country-code.php\" target=\"blank\">here</a>"
+msgstr ""
+
+#: admin/main-settings.php:85
+msgid "Auto Locator"
+msgstr ""
+
+#: admin/main-settings.php:89
+msgid ""
+"This feature will automatically try to get the user's current location when "
+"first visiting the website. If location found it will be saved via cookies "
+"and later will be used to auto display results."
+msgstr ""
+
+#: admin/main-settings.php:107
+msgid "Choose results page"
+msgstr ""
+
+#: admin/main-settings.php:111
+msgid ""
+"This page will display the search results ( for any of your shortcode ) when "
+"using the \"GMW Search Form\". The plugin will first check if a results page "
+"was set in the shortcode setting and if so the results will be displayed in "
+"that page. Otherwise, if no results page\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\twas set in the shortcode setting the results will "
+"be displayed in the page you choose from the select box. Choose the page "
+"from the dropdown menu and paste the shortcode [gmw_results] into it."
+msgstr ""
+
+#: admin/main-settings.php:127
+msgid "Paste the shortcode"
+msgstr ""
+
+#: includes/functions.php:396
+msgid "Getting your current location..."
+msgstr ""
+
+#: includes/functions.php:411
+msgid "- Miles -"
+msgstr ""
+
+#: includes/functions.php:411
+msgid "- Kilometers -"
+msgstr ""
+
+#: includes/functions.php:412
+msgid " -- Within -- "
+msgstr ""
+
+#: includes/functions.php:443 plugins/posts/admin/edit-shortcode.php:263
+#: plugins/posts/admin/edit-shortcode.php:404
+#: plugins/friends/includes/admin/edit-shortcode.php:210
+#: plugins/friends/includes/admin/edit-shortcode.php:352
+msgid "Miles"
+msgstr ""
+
+#: includes/functions.php:444 plugins/posts/admin/edit-shortcode.php:264
+#: plugins/posts/admin/edit-shortcode.php:405
+#: plugins/friends/includes/admin/edit-shortcode.php:211
+#: plugins/friends/includes/admin/edit-shortcode.php:353
+msgid "Kilometers"
+msgstr ""
+
+#: includes/functions.php:622
+msgid "Mi"
+msgstr ""
+
+#: includes/functions.php:624
+msgid "Km"
+msgstr ""
+
+#: includes/functions.php:656
+msgid "Your Location"
+msgstr ""
+
+#: includes/functions.php:694 includes/functions.php:704
+#: plugins/posts/admin/metaboxes.php:161
+msgid "Get your current location"
+msgstr ""
+
+#: includes/functions.php:701
+msgid "- Enter Your Location -"
+msgstr ""
+
+#: includes/widgets.php:50
+msgid "Widget's Title: "
+msgstr ""
+
+#: includes/widgets.php:54
+msgid "Title: (ex:\"Your Location\")"
+msgstr ""
+
+#: includes/widgets.php:59
+msgid "Display User Name."
+msgstr ""
+
+#: includes/widgets.php:62
+msgid "Display location:"
+msgstr ""
+
+#: includes/widgets.php:116
+msgid "Title:"
+msgstr ""
+
+#: includes/widgets.php:120
+msgid "Choose shortcode to use in the sidebar:"
+msgstr ""
+
+#: plugins/posts/admin/admin-addons.php:10
+msgid ""
+"This feature will let you add a location to any post type or pages you "
+"choose. Also you will be able to create an advance search form to let the "
+"users of your site\n"
+"\t\t\t\t\tsearch for locations based on post types, categories, distance and "
+"units and get detailed results near any address they enter."
+msgstr ""
+
+#: plugins/posts/admin/admin-settings.php:13
+msgid "Post Types Settings"
+msgstr ""
+
+#: plugins/posts/admin/admin-settings.php:26
+#: plugins/posts/admin/edit-shortcode.php:202
+msgid "Post types"
+msgstr ""
+
+#: plugins/posts/admin/admin-settings.php:30
+msgid ""
+"Choose the post types where you want the address fields to appear. choose "
+"only the post types which you want to add a location too."
+msgstr ""
+
+#: plugins/posts/admin/admin-settings.php:51
+msgid "Mandatory address fields"
+msgstr ""
+
+#: plugins/posts/admin/admin-settings.php:55
+msgid ""
+"Check this box if you want to make sure that users will add location to a "
+"new post. it will prevent them from saving a post that do not have a "
+"location. Otherwise, users will be able to save a post even without a "
+"location. This way the post will be published and would show up in Wordpress "
+"search results but not in the Proximity search results. "
+msgstr ""
+
+#: plugins/posts/admin/admin-settings.php:64
+#: plugins/posts/admin/edit-shortcode.php:287
+#: plugins/posts/admin/edit-shortcode.php:398
+#: plugins/posts/admin/edit-shortcode.php:453
+#: plugins/posts/admin/edit-shortcode.php:508
+#: plugins/posts/admin/edit-shortcode.php:534
+#: plugins/posts/admin/edit-shortcode.php:577
+#: plugins/posts/admin/edit-shortcode.php:600
+#: plugins/friends/includes/admin/edit-shortcode.php:234
+#: plugins/friends/includes/admin/edit-shortcode.php:346
+#: plugins/friends/includes/admin/edit-shortcode.php:401
+#: plugins/friends/includes/admin/edit-shortcode.php:450
+#: plugins/friends/includes/admin/edit-shortcode.php:473
+msgid "Yes"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:8
+#: plugins/friends/includes/admin/edit-shortcode.php:8
+msgid "Addess fields"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:12
+#: plugins/friends/includes/admin/edit-shortcode.php:12
+msgid ""
+"Type the title for the address field of the search form. for example \"Enter "
+"your address\". this title wll be displayed either next to the address input "
+"field or within if you check the checkbox for it. "
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:23
+#: plugins/friends/includes/admin/edit-shortcode.php:23
+msgid "Field title"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:24
+#: plugins/friends/includes/admin/edit-shortcode.php:24
+msgid "zipcode, city & state or full address..."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:26
+#: plugins/friends/includes/admin/edit-shortcode.php:26
+msgid "Within the input field"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:42
+#: plugins/posts/admin/edit-shortcode.php:522
+msgid "Taxonomies/Categories"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:46
+msgid ""
+"Choose the taxonomies/categories that you want to display as select box in "
+"the search form."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:132
+#: plugins/friends/includes/admin/edit-shortcode.php:88
+msgid "Edit Shortcode"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:164
+#: plugins/friends/includes/admin/edit-shortcode.php:118
+msgid "Create new shortcode"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:192
+#: plugins/friends/includes/admin/edit-shortcode.php:143
+msgid "Search form"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:206
+msgid "Choose the post types to use in the search form."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:227
+#: plugins/friends/includes/admin/edit-shortcode.php:174
+msgid "Radius values"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:231
+#: plugins/friends/includes/admin/edit-shortcode.php:178
+msgid ""
+"Enter distance values in the input box comma separated if you want to have a "
+"select dropdown menu of multiple radius values in the search form. If only "
+"one value entered it will be the default value of the search form which will "
+"be hidden."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:238
+#: plugins/friends/includes/admin/edit-shortcode.php:185
+msgid "Values (comma separated)"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:249
+#: plugins/friends/includes/admin/edit-shortcode.php:196
+msgid "Units"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:253
+#: plugins/friends/includes/admin/edit-shortcode.php:200
+msgid ""
+"Choose if to show both type of units as a dropdown or a single default type."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:260
+#: plugins/friends/includes/admin/edit-shortcode.php:207
+msgid "Show Units"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:262
+#: plugins/friends/includes/admin/edit-shortcode.php:209
+msgid "Both"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:275
+#: plugins/friends/includes/admin/edit-shortcode.php:222
+msgid "Locator icon"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:279
+msgid ""
+"Choose if to display the locator button in the search form. The locator will "
+"get the user&#39;s current location and submit the search form based of the "
+"location found. you can choose one of the default icons or you can add icon "
+"of your own. "
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:314
+#: plugins/friends/includes/admin/edit-shortcode.php:261
+msgid "Results"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:324
+#: plugins/friends/includes/admin/edit-shortcode.php:271
+msgid "Results page"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:328
+#: plugins/friends/includes/admin/edit-shortcode.php:275
+msgid ""
+"The results page will display the search results in the selected page when "
+"using the \"GMW Search Form\" widget or when you want to have the search "
+"form in one page and the results showing in a different page. \n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tChoose the results page from the dropdown menu and "
+"paste the shortcode [gmw_results] into that page. To display the search "
+"result in the same page as the search form choose \"Same Page\" from the "
+"select box."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:352
+#: plugins/friends/includes/admin/edit-shortcode.php:299
+msgid "Results template"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:356
+msgid ""
+"Choose The resuls template file (results.php). You can find the search "
+"results template files in the <code>plugins folder/geo-my-wp/plugin/posts/"
+"search-results</code>. You can modify any of the templates or create your "
+"own.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tIf you do modify or create you own template files "
+"you should create/save them in your theme or child theme folder and the "
+"plugin will read them from there. This way your changes will not be removed "
+"once the plugin is updated. \n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tYou will need to create the folders and save your "
+"results template there <code><strong>themes/your-theme-or-child-theme-folder/"
+"geo-my-wp/posts/search-results/your-results-theme-folder</strong></code>. \n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tYour theme folder will contain the results.php "
+"file and another folder named \"css\" and the style.css within it."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:385
+#: plugins/friends/includes/admin/edit-shortcode.php:333
+msgid "Auto Results"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:389
+#: plugins/friends/includes/admin/edit-shortcode.php:337
+msgid ""
+"Will automatically run initial search and display results based on the "
+"user's current location (if exists via cookies) when he/she first goes to a "
+"search page. You need to define the radius and the units for this initial "
+"search ."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:400
+#: plugins/friends/includes/admin/edit-shortcode.php:348
+msgid "Radius"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:417
+#: plugins/friends/includes/admin/edit-shortcode.php:365
+msgid "Results Output"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:421
+msgid ""
+"Choose how to display the search results. you can do so using map only , "
+"posts only or both map and the posts."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:428
+msgid "Both posts and map"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:429
+msgid "Posts only"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:430
+#: plugins/friends/includes/admin/edit-shortcode.php:378
+msgid "Map only"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:440
+msgid "Featured image"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:444
+msgid "Display featured image and define its width and height in PX. "
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:455
+#: plugins/friends/includes/admin/edit-shortcode.php:403
+msgid "Height"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:458
+#: plugins/posts/admin/edit-shortcode.php:639
+#: plugins/friends/includes/admin/edit-shortcode.php:406
+#: plugins/friends/includes/admin/edit-shortcode.php:510
+msgid "Width"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:470
+msgid "Additional information"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:474
+msgid ""
+"Which fields of the additional information do you want to display for each "
+"of the results."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:482
+msgid "Phone"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:483
+#: plugins/posts/includes/functions.php:80
+msgid "Fax"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:484
+msgid "Email"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:485
+#: plugins/posts/admin/metaboxes.php:81
+msgid "Website"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:496
+msgid "Excerpt"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:500
+msgid ""
+"This featured will grab the number of words that you choose from the post "
+"content and display it in each of the resuts. Set a high number (ex. 99999) "
+"if you wish to display the entire content."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:510
+msgid "Words count"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:526
+msgid "Display the taxonomies/categories for each of the results."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:545
+#: plugins/friends/includes/admin/edit-shortcode.php:418
+msgid "Results per page"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:549
+#: plugins/friends/includes/admin/edit-shortcode.php:422
+msgid ""
+"Choose the number of results per page. By setting a single value you set the "
+"default number of results per page. By giving multiple values, comma "
+"separated, a select box will be created and the users will be able to set "
+"the number of results per page. "
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:565
+#: plugins/friends/includes/admin/edit-shortcode.php:438
+msgid "Driving Distance"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:569
+#: plugins/friends/includes/admin/edit-shortcode.php:442
+msgid ""
+"While the results showing the radius distance from the user to each of the "
+"locations, this feature let you display the exact driving distance. Please "
+"note that each driving distance request counts with google API when you can "
+"have 2500 requests per day."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:588
+#: plugins/friends/includes/admin/edit-shortcode.php:461
+msgid "\"Get Directions\" link"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:592
+#: plugins/friends/includes/admin/edit-shortcode.php:465
+msgid ""
+"Display \"get directions\" link that will open a new window with google map "
+"that shows the exact driving direction from the user to the location."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:618
+#: plugins/friends/includes/admin/edit-shortcode.php:489
+msgid "Map"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:628
+#: plugins/friends/includes/admin/edit-shortcode.php:499
+msgid "Map Settings"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:632
+#: plugins/friends/includes/admin/edit-shortcode.php:503
+msgid ""
+"Settings for the main map. Define its height and width in PX or %. Choose "
+"the map type from the dropdown menu and check the \"auto zoom\" checkbox if "
+"you want all the markers to automatically fit within the map."
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:646
+#: plugins/friends/includes/admin/edit-shortcode.php:517
+msgid "height"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:654
+#: plugins/friends/includes/gmw-location-widgets.php:100
+#: plugins/friends/includes/admin/edit-shortcode.php:525
+msgid "Map Type"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:666
+#: plugins/friends/includes/admin/edit-shortcode.php:537
+msgid "Auto zoom"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:668
+#: plugins/friends/includes/admin/edit-shortcode.php:539
+msgid "Or zoom lever"
+msgstr ""
+
+#: plugins/posts/admin/edit-shortcode.php:673
+#: plugins/friends/includes/admin/edit-shortcode.php:544
+msgid "(will not count if auto zoom is checked)"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:8
+msgid ""
+"GMW - Please enter the full address or the latitude / longitude of the "
+"location."
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:14
+#: plugins/friends/templates/my-location-tab.php:105
+msgid "Street"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:21
+#: plugins/friends/templates/my-location-tab.php:110
+msgid "Apt/Suit"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:28
+#: plugins/friends/templates/my-location-tab.php:115
+msgid "City"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:35
+#: plugins/friends/templates/my-location-tab.php:120
+msgid "State"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:42
+#: plugins/friends/templates/my-location-tab.php:125
+msgid "Zipcode"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:49
+#: plugins/friends/templates/my-location-tab.php:130
+msgid "Country"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:57
+msgid "Phone Number"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:65
+msgid "fax Number"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:73
+msgid "Email Address"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:90 plugins/posts/admin/metaboxes.php:105
+#: plugins/friends/templates/my-location-tab.php:51
+#: plugins/friends/templates/my-location-tab.php:143
+msgid "Latitude"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:98 plugins/posts/admin/metaboxes.php:112
+#: plugins/friends/templates/my-location-tab.php:55
+#: plugins/friends/templates/my-location-tab.php:148
+msgid "Longitude"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:119
+msgid "Full Address"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:126 plugins/posts/admin/metaboxes.php:179
+#: plugins/posts/admin/metaboxes.php:261
+msgid "Days & Hours"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:161
+msgid "Locate Me"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:163
+msgid "Type an adress to autocomplete"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:167
+msgid ""
+"Use the map to drag and drop the marker to the correct location to get the "
+"latitude / longitude and click on the \"Get Address\" button below"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:176 plugins/posts/admin/metaboxes.php:184
+#: plugins/friends/templates/my-location-tab.php:94
+msgid "Address"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:177 plugins/posts/admin/metaboxes.php:218
+#: plugins/friends/templates/my-location-tab.php:95
+msgid "Latitude / Longitude"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:178 plugins/posts/admin/metaboxes.php:236
+msgid "Additional Information"
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:180
+#: plugins/friends/templates/my-location-tab.php:64
+#: plugins/friends/templates/my-location-tab.php:75
+msgid "Loading..."
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:185
+msgid ""
+"Enter Address - Click on the \"address\" tab below, fill up the address "
+"fields and click \"Get Lat/Long\"."
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:219
+msgid ""
+"- Enter Lat/Long - Click on the \"Lat/Long\" tab below, fill up the Latitude/"
+"Longitude fields and click \"Get Address\"."
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:311
+msgid ""
+"Saved Data - This table contains the data that is going to be used. it must "
+"have an address, latitude and longitude."
+msgstr ""
+
+#: plugins/posts/admin/metaboxes.php:332
+msgid "Delete Address"
+msgstr ""
+
+#: plugins/posts/includes/functions.php:78
+#: plugins/friends/includes/gmw-location-functions.php:78
+msgid "Address: "
+msgstr ""
+
+#: plugins/posts/includes/functions.php:78
+#: plugins/posts/includes/functions.php:79
+#: plugins/posts/includes/functions.php:80
+#: plugins/posts/includes/functions.php:81
+#: plugins/posts/includes/search-functions.php:351
+#: plugins/posts/includes/search-functions.php:352
+#: plugins/posts/includes/search-functions.php:353
+#: plugins/posts/includes/search-functions.php:354
+msgid "N/A"
+msgstr ""
+
+#: plugins/posts/includes/functions.php:79
+#: plugins/posts/includes/search-functions.php:351
+msgid "Phone: "
+msgstr ""
+
+#: plugins/posts/includes/functions.php:81
+#: plugins/posts/includes/search-functions.php:353
+msgid "Email: "
+msgstr ""
+
+#: plugins/posts/includes/functions.php:82
+#: plugins/posts/includes/search-functions.php:354
+msgid "Website: "
+msgstr ""
+
+#: plugins/posts/includes/search-functions.php:56
+msgid " - All - "
+msgstr ""
+
+#: plugins/posts/includes/search-functions.php:86
+msgid "per page"
+msgstr ""
+
+#: plugins/posts/includes/search-functions.php:159
+msgid "Page"
+msgstr ""
+
+#: plugins/posts/includes/search-functions.php:159
+msgid "of"
+msgstr ""
+
+#: plugins/posts/includes/search-functions.php:162
+#: plugins/posts/includes/search-functions.php:165
+msgid "First"
+msgstr ""
+
+#: plugins/posts/includes/search-functions.php:163
+#: plugins/posts/includes/search-functions.php:166
+msgid "Prev"
+msgstr ""
+
+#: plugins/posts/includes/search-functions.php:218
+#: plugins/posts/includes/search-functions.php:221
+msgid "Next"
+msgstr ""
+
+#: plugins/posts/includes/search-functions.php:219
+#: plugins/posts/includes/search-functions.php:222
+msgid "Last"
+msgstr ""
+
+#: plugins/posts/includes/search-functions.php:352
+msgid "Fax: "
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-actions.php:35
+#: plugins/friends/includes/gmw-location-component.php:17
+#: plugins/friends/includes/gmw-location-component.php:92
+#: plugins/friends/includes/gmw-location-component.php:126
+#: plugins/friends/includes/gmw-location-screens.php:161
+msgid "Location"
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-activity.php:40
+#, php-format
+msgid ""
+"%s Updated his location at <a target=\"_blank\" href=\"http://maps.google."
+"com/maps?f=d&hl=en&geocode=&saddr="
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-ajax.php:37
+msgid "Data successfully deleted!"
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-ajax.php:75
+msgid "Data successfully saved!"
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-component.php:73
+msgid "Search Location..."
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-component.php:143
+#: plugins/friends/includes/gmw-location-component.php:149
+msgid "Members Location"
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-component.php:144
+msgid "Member's Location"
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-functions.php:91
+msgid "Go"
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-functions.php:94
+msgid "Get Directions"
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-functions.php:133
+msgid " has not added a location yet"
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-widgets.php:64
+msgid "Map Width: ( ex. 200px or 100% )"
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-widgets.php:70
+msgid "Map Height: ( ex. 200px or 100% )"
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-widgets.php:78
+msgid "Show Directions Link."
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-widgets.php:82
+msgid "Show Address."
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-widgets.php:87
+msgid "Show \"No  location\" message."
+msgstr ""
+
+#: plugins/friends/includes/gmw-location-widgets.php:91
+msgid "Zoom Level"
+msgstr ""
+
+#: plugins/friends/includes/admin/admin-addons.php:8
+msgid "Friends Locator ( Require: Buddypress plugin )"
+msgstr ""
+
+#: plugins/friends/includes/admin/admin-addons.php:12
+msgid ""
+"This feature will allow your Buddypress members add their location to their "
+"profile \n"
+"\t\t\t\t\t\tand for you to create a members search form. Using that , "
+"members will be able to search for other members based on \n"
+"\t\t\t\t\t\ta given address and distance. "
+msgstr ""
+
+#: plugins/friends/includes/admin/admin-functions.php:36
+msgid "Choose the \"Age Range\" Field"
+msgstr ""
+
+#: plugins/friends/includes/admin/admin-functions.php:52
+msgid ""
+"Your buddypress profile fields are deactivated.  To activate and use them <a "
+"href=\""
+msgstr ""
+
+#: plugins/friends/includes/admin/admin-settings.php:8
+msgid "Friends Locator ( Buddypress) - Members Settings"
+msgstr ""
+
+#: plugins/friends/includes/admin/edit-shortcode.php:153
+msgid "Xprofile fields"
+msgstr ""
+
+#: plugins/friends/includes/admin/edit-shortcode.php:157
+msgid ""
+"Choose the Xprofile fields that you want to display in the search form. You "
+"can choose one or more Xprofile fields created using checkboxs, select box "
+"and multiselect box that will all be displayed as checkboxes. You can also "
+"choose one Xprofile field created using date field for the age range field."
+msgstr ""
+
+#: plugins/friends/includes/admin/edit-shortcode.php:226
+msgid ""
+"Choose if to display the locator button in the search form. The locator "
+"button will get the user&#39;s current location and submit the search form "
+"based of the location found. you can choose one of the default icons or you "
+"can add icon of your own. "
+msgstr ""
+
+#: plugins/friends/includes/admin/edit-shortcode.php:285
+msgid " -- Same Page -- "
+msgstr ""
+
+#: plugins/friends/includes/admin/edit-shortcode.php:303
+msgid ""
+"Choose The resuls template file (results.php). You can find the search "
+"results template files in the <code>plugins folder/geo-my-wp/plugin/friends/"
+"search-results</code>. You can modify any of the templates or create your "
+"own.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tIf you do modify or create you own template files "
+"you should create/save them in your theme or child theme folder and the "
+"plugin will read them from there. This way your changes will not be removed "
+"once the plugin is updated. \n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tYou will need to create the folders and save your "
+"results template there <code><strong>themes/your-theme-or-child-theme-folder/"
+"geo-my-wp/friends/search-results/your-results-theme-folder</strong></"
+"code>. \n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tYour theme folder will contain the results.php "
+"file and another folder named \"css\" and the style.css within it."
+msgstr ""
+
+#: plugins/friends/includes/admin/edit-shortcode.php:369
+msgid ""
+"Choose how to display the search results. you can do so using map only , "
+"members only or both map and the members."
+msgstr ""
+
+#: plugins/friends/includes/admin/edit-shortcode.php:376
+msgid "Both members and map"
+msgstr ""
+
+#: plugins/friends/includes/admin/edit-shortcode.php:377
+msgid "Members only"
+msgstr ""
+
+#: plugins/friends/includes/admin/edit-shortcode.php:388
+msgid "Avatar"
+msgstr ""
+
+#: plugins/friends/includes/admin/edit-shortcode.php:392
+msgid "Display avatar and define its width and height in PX. "
+msgstr ""
+
+#: plugins/friends/templates/my-location-tab.php:45
+msgid "Your location"
+msgstr ""
+
+#: plugins/friends/templates/my-location-tab.php:60
+msgid "Edit location"
+msgstr ""
+
+#: plugins/friends/templates/my-location-tab.php:61
+msgid "Delete location"
+msgstr ""
+
+#: plugins/friends/templates/my-location-tab.php:72
+msgid "Get you current location"
+msgstr ""
+
+#: plugins/friends/templates/my-location-tab.php:73
+msgid "Locate me"
+msgstr ""
+
+#: plugins/friends/templates/my-location-tab.php:81
+msgid "Find your location on the map"
+msgstr ""
+
+#: plugins/friends/templates/my-location-tab.php:88
+msgid "Type an address for autocomplete"
+msgstr ""
+
+#: plugins/friends/templates/my-location-tab.php:92
+msgid "Enter your location manually"
+msgstr ""
+
+#: plugins/friends/templates/my-location-tab.php:151
+msgid "Get address"
+msgstr ""
+
+#: plugins/friends/templates/my-location-tab.php:162
+msgid "Save Location"
+msgstr ""

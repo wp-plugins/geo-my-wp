@@ -1,0 +1,46 @@
+/**
+ * Default BP search form stylesheet.
+ * @version 1.0
+ * @author Eyal Fitoussi
+ */
+ 
+/* Search Form */
+.gmw-fl-form {
+	margin-bottom:30px;
+}
+
+.gmw-fl-form .editfield label {
+	display:block;
+}
+
+.gmw-fl-form .editfield span.label {
+	font-weight:bold;
+}
+
+.wppl-address-field-wrapper {
+	width: 100%;
+	float: left;
+}
+
+.gmw-fl-form input[type="text"].wppl-address  {
+	width:200px;
+	float:left;
+}
+	
+.gmw-fl-form .date input[type="text"] {
+	width:30px;
+}		
+.gmw-single-address-field {
+	float:left;
+}
+
+.gmw-fl-form .wppl-locate-button-wrapper {
+	border: 0px;
+	background-color: transparent;
+	//position: absolute;
+	//top: 2px;
+	//left: 172px;
+	box-shadow:none;
+	margin-left:3px;
+}
+	
