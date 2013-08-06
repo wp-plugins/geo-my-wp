@@ -12,7 +12,7 @@ Domain Path: /languages/
 
 */
 
-$gmw_current_version = '2.0.2';
+$gmw_current_version = '2.1';
 
 $wppl_on = get_option('wppl_plugins');
 $wppl_options = get_option('wppl_fields');
