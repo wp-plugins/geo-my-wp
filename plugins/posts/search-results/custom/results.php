@@ -66,7 +66,7 @@
 	    		
 	    			<!--  Address -->
 	    			<div class="wppl-address">
-	    				<?php echo $post->address; ?>
+	    				<?php echo $post->formatted_address; ?>
 	    			</div>
 	    		
 	    			<!--  Driving Distance -->
