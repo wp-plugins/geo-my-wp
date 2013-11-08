@@ -21,7 +21,7 @@
 									<span class="help-btn-tooltip-wrapper">
 										<a href="#" class="wppl-help-btn"><img src="<?php echo plugins_url('/geo-my-wp/images/help-btn.png'); ?>" width="25px" height="25px"  /></a>
 										<span class="wppl-help-message">
-											<?php _e('This is optional but will let you track your API requests. you can obtain your free Goole API key <a href="https://code.google.com/apis/console/" target="_blank">here</a>.', 'GMW'); ?>
+											<?php _e('This is optional but will let you track your API requests. you can obtain your free Goole API key <a href="http://geomywp.com/country-code/" target="_blank">here</a>.', 'GMW'); ?>
 											<span class="help-arrow"></span>
 										</span>
 									</span>
