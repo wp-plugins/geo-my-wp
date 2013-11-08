@@ -1,16 +1,15 @@
 === GEO my Wordpress ===
 Contributors: Ninjew
 Donate link: http://geomywp.com/
-Tags: proximity search, zipcode search, radius search, posts, address, distance, google, Google maps, directions, locations, store locator, Geolocate, GEO, 
+Tags: proximity search, zipcode search, radius search, store locator, Geocode posts, address, search distance, google v3 , Google maps, get directions, search locations, Geolocate, GEO, members locator
 Requires at least: 3.0
-Tested up to: 3.5.2
-Buddypress: 1.8
-Stable tag: 2.1
+Tested up to: 3.7.1
+Buddypress: 1.8.1
+Stable tag: 2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Using Google's API tools GEO my WP provides an advance proximity search for any post type or buddypress's members based on a given address and radius.
-
 
 == Description ==
 
@@ -118,20 +117,36 @@ for detailed installation and setup guied click <a href="http://geomywp.com" >he
 
 == Frequently Asked Questions ==
 
-For questions, bugs report and suggestions please visit <a href="http://geomywp.com">www.geomywp.com</a>.
+For questions, bugs report and suggestions please visit <a href="http://geomywp.com">www.geomywp.com</a>
 
 == Screenshots ==
 
-1. For screenshots please visit http://www.geomywp.com.
+1. For screenshots please visit http://www.geomywp.com
 
 == Changelog ==
+
+== 2.2 ==
+
+* New, Improved GMW location section in admin's new/edit post page
+* Database: Modify GMW DB tables - lat/long column change from varchar to float for better performance
+* Database: GMW friends locator table - remove all deleted users from table
+* remove INNER JOIN from members query
+* Added function - delete user from GMW table when user being deleted from wordpress
+* Fix : Single location shortcode/widget - Now Directions link and additional information can be hidden
+* New "Icon drop animation" setting in shortcode.
+* Better Geocoding using javascript when submitting a form
+* Feature: Choose to make address fields mandatory.
+* Improved queries
+* Improved locator icon performance and display
+
 
 == 2.1 ==
 
 * Fix : Removed textarea type xprofile field when choosing the profile fields in the search form
 * Fix : Removed special characters from xprofile fields name in the search forms which caused issues with urls
 * Fix : Add member count for buddypress results page
-* map-icon folder was removed.
+* map-icon folder was removed
+* removed filter gmw_pt_query_meta_args which filters meta_args before wp_query and added gmw_pt_query_args filter instead which let modify the entire wp_query args
 
 == 2.01 ==
 
