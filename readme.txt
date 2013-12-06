@@ -2,10 +2,10 @@
 Contributors: Ninjew
 Donate link: http://geomywp.com/
 Tags: proximity search, zipcode search, radius search, store locator, Geocode posts, address, search distance, google v3 , Google maps, get directions, search locations, Geolocate, GEO, members locator
-Requires at least: 3.0
+Requires at least: 3.3
 Tested up to: 3.7.1
 Buddypress: 1.8.1
-Stable tag: 2.2
+Stable tag: 2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,7 +17,7 @@ GEO my WP is the complete GEO solution for your wordpress project.
 Using google API tool GEO my WP let you add location to any of your post types, pages or Buddypress members. After adding your locations you can create an advance search form including radius values, units (miles and kilometers) and custom taxonomies for post types or profile fields for Buddypress. Results will be displayed based on the address entered and the chosen radius ordered by the distance.
 Together with other great features like auto locating user's current location, displaying driving distance, "get directions" link, google map with markers of the location and much more, GEO my WP just might be the coolest GEO tool for WordPress.
 
-The great features of GEO my WP:
+= The great features of GEO my WP =
 
 * Works with posts, post types and pages - Add location to any of your post, post types or pages.
 * Works with Buddypress - Buddypress members can add their location.
@@ -33,9 +33,7 @@ The great features of GEO my WP:
 * "Get directions" link opens a new window with the driving directions to the location.
 * Pagination - choose the number of results per page.
 
-In the back end:
-
-General settings:
+= General settings =
 
 * User friendly backend where each feature and setting documented.
 * Enter your Google API key
@@ -45,7 +43,7 @@ General settings:
 * Choose the Post types where you want to add location.
 * Choose the theme color that will control the Title, links and address in the results.
 
-"New/Update" page in admin area:
+= "New/Update" page in admin area: =
 
 * Address fields are automatically created for the chosen post types.
 * Meta boxes for phone number, fax number, email address and website that will show in results and in map's information windows.
@@ -58,13 +56,13 @@ General settings:
 	* Enter address manually and return lat/long
 	* Enter lat/long manually and return the address
 
-Buddypress:
+= Buddypress =
 
 * Add new "location" tab to member's profile page. 
 * Members can easily add their location.
 * Create an advance search form to locate members near a certain address.
 
-Shortcodes:
+= Shortcodes =
 
 * Shortcode for single location - displays map of a single location.
 * Shortcode for user's location- display the user's location everywhere on the template. Can choose between zipcode or city. and can choose if to display user's name when logged in.
@@ -89,11 +87,16 @@ Shortcode builder in the admin settings make it easier to build you own search f
 * Different results styling to choose from.
 * and more.....
 
-Widgets:
+= Widgets =
 
 * Search form widget to display any search from in the sidebar.
 * User's location widget to displays the user's location in the sidebar.
 * Buddypress Member's location.
+
+= Languages =
+GEO my WP is currently available in the following languages:
+
+* German ( by [Frank Winter](http://www.socialmedia4all.net) )
 
 == Installation ==
 
@@ -117,15 +120,27 @@ for detailed installation and setup guied click <a href="http://geomywp.com" >he
 
 == Frequently Asked Questions ==
 
-For questions, bugs report and suggestions please visit <a href="http://geomywp.com">www.geomywp.com</a>
+For questions, bugs report and suggestions please visit [GEO my WP Furom](http://geomywp.com/support/forums/)
 
 == Screenshots ==
 
-1. For screenshots please visit http://www.geomywp.com
+For screenshots please visit [GEO my WP](http://www.geomywp.com)
 
 == Changelog ==
 
-== 2.2 ==
+	
+= 2.3 =
+
+* fix: issue cause Google API load to fail over HTTPS ( fix provided by Chris http://wordpress.org/support/topic/fails-over-https thank you)
+* added mailto link to email address fields of posts in search results
+* [gmw_single_location] - can now be used in the loop to display location of each post in the loop
+* [gmw_single_location] - replaced show_info attribute with additional_info. you can now pass the additional fields that will be displayed. ex [gmw_single_location additional_info="address,phone,fax,email,website"] pass the value 0 if you want to hide the additional info.
+* fix: small issue with form showing results on the same page when should be in another page
+* fix: Issue with Member location widget displaying "no location" message even when set to do otehrwise
+* Localization text
+* German translation - Provided by Frank Winter - thank you!
+
+= 2.2 =
 
 * New, Improved GMW location section in admin's new/edit post page
 * Database: Modify GMW DB tables - lat/long column change from varchar to float for better performance
@@ -140,7 +155,7 @@ For questions, bugs report and suggestions please visit <a href="http://geomywp.
 * Improved locator icon performance and display
 
 
-== 2.1 ==
+= 2.1 =
 
 * Fix : Removed textarea type xprofile field when choosing the profile fields in the search form
 * Fix : Removed special characters from xprofile fields name in the search forms which caused issues with urls
@@ -148,16 +163,16 @@ For questions, bugs report and suggestions please visit <a href="http://geomywp.
 * map-icon folder was removed
 * removed filter gmw_pt_query_meta_args which filters meta_args before wp_query and added gmw_pt_query_args filter instead which let modify the entire wp_query args
 
-== 2.01 ==
+= 2.01 =
 
 * Minor fix - Add-ons Updater System
 
-== 2.0 ==
+= 2.0 =
 
 This is a major update with many bug fixs, core modification and improvements, new features and more. Please make sure to backup your current version before updating to the new one. 
 After updating you will need to go over the settings page and re-save your settings as well as the search forms as many things have changed.
 
-<strong>Please vistin <a href="http://geomywp.com">www.geomywp.com</a> for more information before updating your plugin</strong>
+**Please vistin <a href="http://geomywp.com">www.geomywp.com</a> for more information before updating your plugin**
 Below are some of the major changes in this version:
 
 * Core modification - The code reduced drastically, It is much cleaner, performs better, many function are documented, the number of files and folders had been reduced and more organized.
@@ -181,7 +196,7 @@ Below are some of the major changes in this version:
 	* single member - [gmw_member_location]
 * ettings in the "search form shortcodes" and other shortcodes changed as well. Now you can set the "Width" and "Height" of the maps to either pixels or percentage. in the "search form shortcodes" settings  and in the "single location" and "single member" shortcodes. for example: [gmw_single_location width="100%" height="200px"] .
 
-== 1.7 ==
+= 1.7 =
 
 * This is a major update - most of the core code has improved for better performance, security issues and many bug fix.
 * Works with Wordpress 3.5. 
@@ -199,31 +214,31 @@ Below are some of the major changes in this version:
 * Files and folders better organized.
 * Map, markers and info windows - visually improved as well as performance.
 
-== 1.6.1 ==
+= 1.6.1 =
 * Fixed bug with Buddypress's "Location" tab styling
 
-== 1.6 ==
+= 1.6 =
 
 * Bug fix - Fixed locator icon being displayed even when checkbox is unchecked 
 * Bug fix - Fixed Buddypress's issue where profile fields would not display in the search form.
 * Bug fix - Loading icon hold and location would not update for user enter his location in the location tab
 * Bug fix - Buddypress's search result display deleted user.
 
-== 1.5.2 ==
+= 1.5.2 =
 
 * Bugs fix.
 * Memory issues.
 * New shortcode to display Buddypress member's location anywhere within a template page.
 * New widget to display Buddypress member's location in the sidebar
 
-== 1.5.1 ==
+= 1.5.1 =
 
 * Fix issue with "User location" shortcode/widget not getting the right location.
 * Fix "undefined function" error when "Friends Connection" component (buddypress settings) is unchecked.
 * Fix avater width/height in shortcode issue.
 
 
-== 1.5 ==
+= 1.5 =
 
 * initial release of GEO my WP - the upgraded version of wordpress places locator
 * Improvement of the backend.
@@ -238,7 +253,7 @@ Below are some of the major changes in this version:
 * Various new settings
 
 
-== 1.3 ==
+= 1.3 =
 
 * Works with wordpress 3.4.1
 * Back end improvement - 5 options to choose from when adding a location.
