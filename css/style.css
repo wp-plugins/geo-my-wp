@@ -1,0 +1,549 @@
+/* WP PLACES LOCATOR blue STYLESHEET */
+
+///// MAP STYLING  ////
+
+div.wppl-info-window {
+	font-size: 13px;
+	font-family: arial, serif;
+	}
+	
+.wppl-form div {
+	margin-bottom:10px;
+	}
+
+.wppl-form div p {
+	margin:0px !important;
+	}
+
+.wppl-form div label {	
+	font-size: 14px;
+	color: #444;
+	}
+	
+.wppl-form div input , .wppl-form div select {	
+	margin:0px !important;
+	}
+	
+/////////////// blue//////////////////////////
+
+#wppl-output-wrapper-blue {
+	float:left;
+	width:650px;
+	}
+
+#wppl-output-wrapper-blue h2.wppl-h2 {
+	font-size: 18px;
+	color: #315E73;
+	font-family: arial;
+	padding: 5px 7px;
+	background: #F9F9F9;
+	text-shadow: 1px 1px 1px white;
+	border: 1px solid #DDD;
+	text-decoration: none;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	text-transform: capitalize;
+	}
+	
+.wppl-map-wrapper-blue {	
+	border: 1px solid #999;
+	padding: 5px;
+	background: #EEE;
+	float: left;
+	border-bottom: 1px solid #BBB;
+	border-right: 1px solid #BBB;
+	border-left: 1px solid #DDD;
+	border-top: 1px solid #EEE;
+	margin-bottom: 10px;
+	}
+	
+.wppl-results-wrapper-blue {	
+	//margin-top: 15px;
+	float: left;
+	
+	}
+	
+.wppl-results-wrapper {
+	width: 600px;
+	}
+	
+.wppl-single-result-blue {
+	font-family: arial;
+	float: left;
+	padding: 5px;
+	background: #F9F9F9;
+	padding: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	border-bottom: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+	border-left: 1px solid #EEE;
+	border-top: 1px solid #EEE;
+	width:630px;
+	}
+	
+.wppl-single-result-blue .wppl-title-holder {
+	border: 1px solid #6D97AB;
+	text-shadow: 1px 1px 0px #888 !important;
+	background: #91BACF;
+	font: 20px georgia, "Times New Roman", Times, serif;
+	font-weight: normal;
+	text-transform: capitalize;
+	padding: 5px 0px 0px 17px;
+	margin-bottom: 5px;
+	font-family: georgia, sarif;
+	box-shadow: inset 0px 0px 4px white;
+	-webkit-box-shadow: inset 0px 0px 4px white;
+	-moz-box-shadow: inset 0px 0px 4px white;
+	-webkit-border-radius: 4px !important;
+	-moz-border-radius: 4px !important;
+	border-radius: 4px !important;
+	color: white !important;
+	float: left;
+	width: 610px;
+	}
+	
+.wppl-single-result-blue h3.wppl-h3 {
+	float:left;
+	clear:none;
+	text-transform: capitalize;
+	text-decoration: none;
+	font-size: 16px;
+	margin-bottom: 5px !important;
+	}
+	
+.wppl-single-result-blue .wppl-h3 a:link, .wppl-single-result-blue .wppl-h3 a:visited {
+	text-decoration: none;
+	color: white;
+	font: 20px georgia, "Times New Roman", Times, serif;
+	letter-spacing: -1px;
+}
+
+.wppl-single-result-blue .wppl-h3 a:hover, .wppl-single-result-blue .wppl-h3 a:active {
+
+}
+	
+.wppl-single-result-blue .result-number {
+	float: left;
+	margin-right: 5px;
+	}
+	
+.wppl-single-result-blue .wppl-radius-dis {
+	float: left;
+	margin-left: 5px;
+	}
+	
+.wppl-single-result-blue .wppl-info {
+	font-family: arial, sans-serif;
+	color: #666;
+	font-size: 12px;
+	line-height: 20px;
+	clear: both;
+	float: left;
+	border: 1px solid gainsboro;
+	width: 608px;
+	background: #EFEFEF;
+	margin-top: 5px;
+	padding: 5px 10px;
+	text-shadow: 1px 1px 1px white;
+	box-shadow: inset 0px 0px 4px white;
+	-webkit-box-shadow: inset 0px 0px 4px white;
+	-moz-box-shadow: inset 0px 0px 4px white;
+	border-radius: 3px;
+	}
+	
+.wppl-single-result-blue .wppl-info .wppl-info-left {
+	float: left;
+	width: 227px;
+	border-right: 1px dashed #AAA;
+	margin-right: 20px;
+	}
+	
+.wppl-single-result-blue .wppl-info .wppl-info-right {
+	float: left;
+width: 360px;
+	}
+	
+.wppl-single-result-blue .wppl-thumb {
+	border: 1px solid #DFDFDF;
+	//width: 140px;
+	//height: 140px;
+	padding: 4px;
+	float: left;
+	margin-right: 10px;
+	display: inline;
+	background: #EFEFEF;
+}	
+
+.wppl-single-result-blue .wppl-thumb img {
+	//width:140px;
+	//height:140px;
+	}
+
+.wppl-single-result-blue .wppl-excerpt {	
+	float: left;
+	font-family: georgia, sans-serif;
+	font-size: 14px;
+	color: #666;
+	width: 300px;
+	text-shadow: 1px 1px 1px white;
+	}
+	
+.wppl-single-result-blue .wppl-info div span {	
+	color: #4F86A1;
+	font-size: 14px;
+	text-transform: capitalize;
+	word-spacing: -1px;
+	text-decoration: none;
+	font-family: georgia;
+	text-shadow: 1px 1px 1px white;
+	font-weight: normal;
+	margin-right: 3px;
+	}
+
+.wppl-single-result-blue .wppl-drive-dis {	
+	margin-right: 10px;
+	float:left;
+	}	
+	
+.wppl-single-result-blue .wppl-get-directions {	
+	float:left;
+	}	
+	
+#wppl-output-wrapper-blue .wppl-pagination-holder {
+	float: left;
+	width: 100%;
+	clear: both;
+	margin-bottom: 10px;
+	padding-left: 250px;
+	}
+	
+#wppl-output-wrapper-blue .wppl-pagination a:link, #wppl-output-wrapper-blue .wppl-pagination a:visited {
+	color: #666;
+	font-family: arial;
+	font-size: 12px;
+	padding: 0 5px;
+	background: #FAFAFA;
+	text-shadow: 1px 1px 1px white;
+	border: 1px solid #DDD;
+	text-decoration: none;
+}
+
+#wppl-output-wrapper-blue .wppl-pagination a:hover, #wppl-output-wrapper-blue .wppl-pagination a:active {
+	color: #222;
+	background:#eee
+}
+
+#wppl-output-wrapper-blue .prev-btn a:link, #wppl-output-wrapper-blue .prev-btn a:visited, 
+#wppl-output-wrapper-blue .next-btn a:link, #wppl-output-wrapper-blue .next-btn a:visited {
+	padding: 0px 4px !important;
+	text-decoration: none;
+	background: #FAFAFA;
+	border: 1px solid #DDD;
+	color: #666;
+	font-size: 13px;
+	font-family: arial, sans-serif;
+	text-shadow: 1px 1px 1px white;
+	float: left;
+	margin-right: 5px;
+}
+
+#wppl-output-wrapper-blue .prev-btn a:hover, #wppl-output-wrapper-blue .prev-btn a:active, 
+#wppl-output-wrapper-blue .next-btn a:hover, #wppl-output-wrapper-blue .next-btn a:active {
+	color:#222;
+	}
+
+#wppl-output-wrapper-blue .wppl-get-directions a:link, #wppl-output-wrapper-blue .wppl-get-directions a:visited, 
+#wppl-output-wrapper-blue .wppl-website a:link, #wppl-output-wrapper-blue .wppl-website a:visited  {
+	color: #555;
+	}	
+	
+#wppl-output-wrapper-blue .wppl-get-directions a:hover, #wppl-output-wrapper-blue .wppl-get-directions a:active, 
+#wppl-output-wrapper-blue .wppl-website a:hover, #wppl-output-wrapper-blue .wppl-website a:active {
+	color: #888;
+	}	
+	
+#wppl-output-wrapper-blue .wppl-pagination .current a {
+	text-decoration: none;
+	color: white;
+	background: #91BACF;
+	border: 1px solid #6D97AB;
+	text-shadow: 0px 0px 1px #111;
+}
+	
+
+#wppl-output-wrapper-blue .wppl-pagination a {
+	float:left;
+	margin-right:5px;	
+	}
+		
+/////////////// defualt //////////////////////////
+
+#wppl-output-wrapper-default {
+	float:left;
+	width:650px;
+	}
+
+#wppl-output-wrapper-default h2.wppl-h2 {
+	font-size: 18px;
+	color: #315E73;
+	font-family: arial;
+	padding: 5px 7px;
+	background: #F9F9F9;
+	text-shadow: 1px 1px 1px white;
+	border: 1px solid #DDD;
+	text-decoration: none;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	text-transform: capitalize;
+	}
+	
+.wppl-map-wrapper-default {	
+	border: 1px solid #999;
+	padding: 5px;
+	background: #EEE;
+	float: left;
+	border-bottom: 1px solid #BBB;
+	border-right: 1px solid #BBB;
+	border-left: 1px solid #DDD;
+	border-top: 1px solid #EEE;
+	margin-bottom: 10px;
+	}
+	
+.wppl-results-wrapper-default {	
+	//margin-top: 15px;
+	float: left;
+	
+	}
+	
+.wppl-results-wrapper {
+	width: 600px;
+	}
+	
+.wppl-single-result-default {
+	font-family: arial;
+	float: left;
+	padding: 5px;
+	background: #F9F9F9;
+	padding: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	border-bottom: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+	border-left: 1px solid #EEE;
+	border-top: 1px solid #EEE;
+	width:630px;
+	}
+	
+.wppl-single-result-default .wppl-title-holder {
+	border: 1px solid #ccc;
+	text-shadow: 1px 1px 1px white !important;
+	background: #EEE;
+	font: 20px "Times New Roman", Times, serif;
+	font-weight: normal;
+	text-transform: capitalize;
+	padding: 5px 0px 0px 17px;
+	margin-bottom: 5px;
+	box-shadow: inset 0px 0px 4px white;
+	-webkit-box-shadow: inset 0px 0px 4px white;
+	-moz-box-shadow: inset 0px 0px 4px white;
+	-webkit-border-radius: 4px !important;
+	-moz-border-radius: 4px !important;
+	border-radius: 4px !important;
+	color: #4E7385 !important; !important;
+	float: left;
+	width: 610px;
+	}
+	
+.wppl-single-result-default h3.wppl-h3 {
+	float:left;
+	clear:none;
+	text-transform: capitalize;
+	text-decoration: none;
+	font-size: 16px;
+	margin-bottom: 5px !important;
+	}
+	
+.wppl-single-result-default .wppl-h3 a:link, .wppl-single-result-default .wppl-h3 a:visited {
+	text-decoration: none;
+	color:#457085;
+	font: 20px "Times New Roman", Times, serif;
+	letter-spacing: -1px;
+}
+
+.wppl-single-result-default .wppl-h3 a:hover, .wppl-single-result-default .wppl-h3 a:active {
+	
+	color: #6D97AB;
+}
+	
+.wppl-single-result-default .result-number {
+	float: left;
+	margin-right: 5px;
+	}
+	
+.wppl-single-result-default .wppl-radius-dis {
+	float: left;
+	margin-left: 5px;
+	}
+	
+.wppl-single-result-default .wppl-info {
+	font-family: arial, sans-serif;
+	color: #666;
+	font-size: 12px;
+	line-height: 20px;
+	clear: both;
+	float: left;
+	border: 1px solid gainsboro;
+	width: 608px;
+	background: #EFEFEF;
+	margin-top: 5px;
+	padding: 5px 10px;
+	text-shadow: 1px 1px 1px white;
+	box-shadow: inset 0px 0px 4px white;
+	-webkit-box-shadow: inset 0px 0px 4px white;
+	-moz-box-shadow: inset 0px 0px 4px white;
+	border-radius: 3px;
+	}
+	
+.wppl-single-result-default .wppl-info .wppl-info-left {
+	float: left;
+	width: 227px;
+	border-right: 1px dashed #AAA;
+	margin-right: 20px;
+	
+	}
+	
+.wppl-single-result-default .wppl-info .wppl-info-right {
+	float: left;
+width: 360px;
+	}
+	
+.wppl-single-result-default .wppl-thumb {
+	border: 1px solid #DFDFDF;
+	//width: 140px;
+	//height: 140px;
+	padding: 4px;
+	float: left;
+	margin-right: 10px;
+	display: inline;
+	background: #EFEFEF;
+}	
+
+.wppl-single-result-default .wppl-thumb img {
+	//width:140px;
+	//height:140px;
+	}
+
+.wppl-single-result-default .wppl-excerpt {	
+	float: left;
+	font-family: georgia, sans-serif;
+	font-size: 14px;
+	color: #666;
+	width: 300px;
+	text-shadow: 1px 1px 1px white;
+	}
+	
+.wppl-single-result-default .wppl-info div span {	
+	color: #444;
+	font-size: 14px;
+	text-transform: capitalize;
+	word-spacing: -1px;
+	text-decoration: none;
+	font-family: georgia;
+	text-shadow: 1px 1px 1px white;
+	font-weight: normal;
+	margin-right: 3px;
+	}
+
+.wppl-single-result-default .wppl-drive-dis {	
+	margin-right: 10px;
+	float:left;
+	}	
+	
+.wppl-single-result-default .wppl-get-directions {	
+	float:left;
+	}	
+	
+#wppl-output-wrapper-default .wppl-pagination-holder {
+	float: left;
+	width: 100%;
+	clear: both;
+	margin-bottom: 10px;
+	padding-left: 250px;
+	}
+	
+#wppl-output-wrapper-default .wppl-pagination a:link, #wppl-output-wrapper-default .wppl-pagination a:visited {
+	color: #6D97AB;
+	font-family: arial;
+	font-size: 12px;
+	padding: 0 5px;
+	background: #FAFAFA;
+	text-shadow: 1px 1px 1px white;
+	border: 1px solid #DDD;
+	text-decoration: none;
+}
+
+#wppl-output-wrapper-default .wppl-pagination a:hover, #wppl-output-wrapper-default .wppl-pagination a:active {
+	color: #222;
+	background:#eee
+}
+
+#wppl-output-wrapper-default .prev-btn a:link, #wppl-output-wrapper-default .prev-btn a:visited, #wppl-output-wrapper-default .next-btn a:link, #wppl-output-wrapper-default .next-btn a:visited {
+	padding: 0px 4px !important;
+	text-decoration: none;
+	background: #FAFAFA;
+	border: 1px solid #DDD;
+	color: #666;
+	font-size: 13px;
+	font-family: arial, sans-serif;
+	text-shadow: 1px 1px 1px white;
+	float: left;
+	margin-right: 5px;
+}
+
+#wppl-output-wrapper-default .prev-btn a:hover, #wppl-output-wrapper-default .prev-btn a:active, #wppl-output-wrapper-default .next-btn a:hover, #wppl-output-wrapper-default .next-btn a:active {
+	color:#222;
+	}
+
+#wppl-output-wrapper-default .wppl-pagination .current a {
+	text-decoration: none;
+	color: #555;
+	background: #EEE;
+	border: 1px solid #DDD;
+	text-shadow: 0px 0px 1px white;
+
+}
+
+#wppl-output-wrapper-default .wppl-get-directions a:link, #wppl-output-wrapper-default .wppl-get-directions a:visited, 
+#wppl-output-wrapper-default .wppl-website a:link, #wppl-output-wrapper-default .wppl-website a:visited  {
+	color: #2E738F;
+	}	
+	
+#wppl-output-wrapper-default .wppl-get-directions a:hover, #wppl-output-wrapper-default .wppl-get-directions a:active, 
+#wppl-output-wrapper-default .wppl-website a:hover, #wppl-output-wrapper-default .wppl-website a:active {
+	color: #4B90AB;
+	}	
+
+#wppl-output-wrapper-default .wppl-pagination a {
+	float:left;
+	margin-right:5px;	
+	}
+.wppl-num-value {
+	float:left;
+	}
+	
+.wppl-units-wrapper {
+	float:left;
+	margin-left: 5px;
+	margin-right:5px;
+	}
+	
+.wppl-distance-wrapper {
+	float:left;
+	}
+	
+#agm_mh_footer {
+	display:none;
+	}
+	
+
