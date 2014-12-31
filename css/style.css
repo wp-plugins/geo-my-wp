@@ -1,0 +1,60 @@
+/* WP PLACES LOCATOR STYLESHEET */
+/* CREATED BY EYAL FITOUSSI 	*/
+.wppl-pagination-holder {
+	float: left;
+	width: 100%;
+	clear: both;
+	}
+	
+.wppl-pagination-wrapper{
+	clear:both;
+	}
+
+.wppl-pagination a {
+	float:left;
+	margin-right:5px;	
+	}
+	
+.wppl-pagination .current a {
+	text-decoration:none;
+	color:#333;	
+	}
+	
+.wppl-pagination a:link ,.wppl-pagination a:visited  {
+	
+	}
+	
+.wppl-pagination a:hover, .wppl-paginatio a:active {
+	text-decoration:none;
+	}
+	
+.prev-btn {
+	float:left;
+	text-decoration:none;
+	margin-right:5px;
+	}
+	
+.next-btn {
+	float:left;
+	text-decoration:none;
+	}
+	
+.wppl-num-value {
+	float:left;
+	}
+	
+.wppl-units-wrapper {
+	float:left;
+	margin-left: 5px;
+	margin-right:5px;
+	}
+	
+.wppl-distance-wrapper {
+	float:left;
+	}
+	
+#agm_mh_footer {
+	display:none;
+	}
+	
+
