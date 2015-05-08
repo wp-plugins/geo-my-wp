@@ -5,7 +5,7 @@ Tags: Geo-location, Geolocation, proximity search, zipcode search, radius search
 Requires at least: 4.0
 Tested up to: 4.1.1
 Buddypress: 2.2.1
-Stable tag: 2.6.0.1
+Stable tag: 2.6.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,10 @@ For screenshots please visit [GEO my WP](http://www.geomywp.com)
 == Other Notes ==
 
 == Changelog ==
+
+= 2.6.0.2 =
+* Fix: Mandatory address doesn't function properly and causes JS error.
+* Fix : Removed "Keywords" field from horizontal-gray template. Accidently added in previous version. 
 
 = 2.6.0.1 =
 * Fix: Conflict between the licensing system of GEO my WP and other plugins.
