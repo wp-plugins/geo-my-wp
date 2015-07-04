@@ -1,13 +1,13 @@
 === GEO my Wordpress ===
 Contributors: ninjew
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7FK9DTB9N2EEU
+Donate link: http://geomywp.com/
 Tags: Geo-location, Geolocation, proximity search, zipcode search, radius search, store locator, Geolocate posts, address search, search distance, google v3 , Google maps, get directions, search locations, Geolocate, GEO, members locator, Geolocate memebrs, mapping, mapping software, latitude, longitude, locations finder, map creator.
 Requires at least: 4.0
-Tested up to: 4.1.1
-Buddypress: 2.2.1
-Stable tag: 2.6.0.2
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tested up to: 4.2.2
+Buddypress: 2.1.1
+Stable tag: 2.6.1
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Using Google's API tools GEO my WP provides an advance proximity search for any post type or buddypress's members based on a given address and radius.
 
@@ -130,35 +130,9 @@ For screenshots please visit [GEO my WP](http://www.geomywp.com)
 
 == Changelog ==
 
-= 2.6.0.2 =
-* Fix: Mandatory address doesn't function properly and causes JS error.
-* Fix : Removed "Keywords" field from horizontal-gray template. Accidently added in previous version. 
+= 2.6.1 = 
 
-= 2.6.0.1 =
-* Fix: Conflict between the licensing system of GEO my WP and other plugins.
-
-= 2.6 =
-* Compatible with WordPress 4.1.1
-* Compatible with BuddyPress 2.2.1
-* New hook: Filter gmw_google_maps_api to enable/disable Google Maps API.
-* New hook: new filter gmw_except_content to filter the content of the excerpt function. Can be used to modify the excerpt function to display content from the actuall post excerpt instead of post content.
-* New feature: "Read more" link can be adde to excerpt via form editor.
-* New feature: "Page Load Results" tab added to Members Locator forms.
-* New feature: Improved Current Location shortcode/widget. A map of the user's current location can now be displayed together with the location. See the shortcodes page ( GEO my WP -> Shortcodes -> Current Location tab ) for complete shortcode usage information.
-* New: new attributes added to [gmw_single_location] shortcode. See the shortcodes page ( GEO my WP -> Shortcodes -> Single Location tab ) for complete shortcode usage instructions.
-* New: Location dashicon added before the address showing in BuddyPress activity when member updates his profile.
-* Fix: Bug where [gmw form="results"] will display results of search form that is not set to display results in a different page.
-* Fix: Additional information not showing in search results ( all results template files were updated ).
-* Fix: Units system in Driving distance function.
-* Fix: Website field bug in additional information function as well in gmw_single_location shortcode.
-* Fix: Warning on form editor page.
-* Fix: Members Locator Age fields query bug.
-* Fix: Default coordinates set for the "Edit Post" page do not apply.
-* Fix: Sweed-date "Orderby" dropdown will not remember the selected choice when using pagination.
-* Improved: Search queries.
-* Updated: GEO my WP Shortcodes page information.
-* Updated: Translation files.
-* various minor bug fixes
+* This is a major update. Please click <a href="https://geomywp.com/blog/geo-my-wp-2-6-1/" target="_blank">here</a> to see full version change-log before updating.
 
 = 2.5 = 
 
